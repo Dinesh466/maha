@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sri Mahalakshmi Timber Depo & Furniture Mart</title>
     
-    <!-- Tailwind CSS CDN for modern and rapid utility styling -->
+    <!-- Tailwind CSS CDN for premium and modern utility styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Google Fonts - Marcellus (Serif) & Plus Jakarta Sans (Sans-serif) -->
@@ -69,6 +69,37 @@
         .admin-drawer.open {
             transform: translateX(0);
         }
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .whatsapp-btn:hover {
+            transform: scale(1.05) translateY(-2px);
+            background-color: #20ba5a;
+        }
+        /* Skeleton placeholder animation for image loads */
+        .skeleton {
+            background: linear-gradient(90deg, #E6D5C1 25%, #FAF6F0 50%, #E6D5C1 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
     </style>
 </head>
 <body class="text-stone-800 antialiased overflow-x-hidden">
@@ -96,8 +127,8 @@
             
             <!-- Language Selector Toggle & Admin Button -->
             <div class="flex items-center gap-3">
-                <button id="btn-admin-toggle" class="bg-stone-900 border border-stone-800 hover:border-timber-500 text-stone-300 hover:text-white px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1">
-                    <i class="fa-solid fa-lock"></i> <span id="lbl-admin-btn">Owner Login</span>
+                <button id="btn-admin-toggle" class="bg-stone-900 border border-stone-800 hover:border-timber-500 text-stone-300 hover:text-white px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-screwdriver-wrench text-timber-400"></i> <span id="lbl-admin-btn">GitHub CMS Sync</span>
                 </button>
                 <div class="flex items-center bg-stone-900 border border-stone-800 p-1 rounded-full shadow-inner">
                     <button id="btn-lang-en" class="text-xs px-3 py-1.5 rounded-full font-bold transition-all duration-300 bg-timber-600 text-white shadow-md">EN</button>
@@ -113,76 +144,40 @@
             <!-- Header -->
             <div class="p-6 border-b border-stone-100 flex justify-between items-center bg-stone-950 text-white">
                 <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-screwdriver-wrench text-timber-400"></i>
-                    <h3 class="font-serif text-lg font-bold" id="lbl-drawer-title">Showcase Manager</h3>
+                    <i class="fa-solid fa-cloud-arrow-down text-amber-500"></i>
+                    <h3 class="font-serif text-lg font-bold" id="lbl-drawer-title">GitHub Showcase Manager</h3>
                 </div>
                 <button id="btn-admin-close" class="text-stone-400 hover:text-white text-xl">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
-            <!-- Body Forms -->
-            <div class="p-6 flex-1 overflow-y-auto space-y-8">
-                <!-- 1. Add Custom Category -->
+            <!-- Body -->
+            <div class="p-6 flex-1 overflow-y-auto space-y-6">
                 <div>
-                    <h4 class="font-serif text-base font-bold text-stone-900 mb-3" id="lbl-drawer-sec1">Create Custom Product Category</h4>
-                    <form id="form-add-category" class="space-y-3">
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Category Name (English)</label>
-                            <input type="text" id="newCatEn" required class="w-full px-4 py-2 rounded-lg border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-timber-500" placeholder="e.g., Dining Set">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Category Name (Telugu)</label>
-                            <input type="text" id="newCatTe" required class="w-full px-4 py-2 rounded-lg border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-timber-500" placeholder="ఉదా: డైనింగ్ సెట్లు">
-                        </div>
-                        <button type="submit" class="w-full bg-stone-900 hover:bg-stone-950 text-white text-xs font-bold py-2.5 rounded-lg transition-all">
-                            + Add New Category
-                        </button>
-                    </form>
+                    <h4 class="font-serif text-base font-bold text-stone-900 mb-2">Live Content Sync</h4>
+                    <p class="text-xs text-stone-500 mb-4">
+                        We automatically search and retrieve photos from your GitHub repository folders (`beds/`, `windows/`, etc.). When you upload a new image, run a sync here to force an immediate update of your live website.
+                    </p>
+                    <button id="btn-github-sync" class="w-full bg-timber-700 hover:bg-timber-800 text-white text-sm font-bold py-3 px-4 rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-rotate"></i> <span>Scan & Synchronize GitHub Now</span>
+                    </button>
+                    <div id="sync-status" class="text-xs text-stone-600 mt-2 text-center italic hidden">Scanning repository directories...</div>
                 </div>
 
-                <div class="border-t border-stone-100"></div>
+                <div class="border-t border-stone-200 my-4"></div>
 
-                <!-- 2. Add Showcase Product -->
                 <div>
-                    <h4 class="font-serif text-base font-bold text-stone-900 mb-3" id="lbl-drawer-sec2">Add New Product to Gallery</h4>
-                    <form id="form-add-product" class="space-y-4">
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Product Category</label>
-                            <select id="prodCategory" required class="w-full px-4 py-2 rounded-lg border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-timber-500 bg-white">
-                                <!-- Categories populated dynamically -->
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Product Name (English)</label>
-                            <input type="text" id="prodNameEn" required class="w-full px-4 py-2 rounded-lg border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-timber-500" placeholder="e.g., Carved Teak Window Frame">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Product Name (Telugu)</label>
-                            <input type="text" id="prodNameTe" required class="w-full px-4 py-2 rounded-lg border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-timber-500" placeholder="ఉదా: కిటికీ చట్రం">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Product Description (English)</label>
-                            <input type="text" id="prodDescEn" required class="w-full px-4 py-2 rounded-lg border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-timber-500" placeholder="e.g., Heavy Burma teakwood construction.">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Product Description (Telugu)</label>
-                            <input type="text" id="prodDescTe" required class="w-full px-4 py-2 rounded-lg border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-timber-500" placeholder="ఉదా: గట్టి బర్మా టేకు కలప తయారీ.">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Product Photo</label>
-                            <input type="file" id="prodFile" accept="image/*" class="w-full text-sm text-stone-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-timber-50 file:text-timber-700 hover:file:bg-timber-100">
-                            <div class="text-xs text-stone-400 my-1 text-center font-bold">OR</div>
-                            <input type="url" id="prodUrl" class="w-full px-4 py-2 rounded-lg border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-timber-500" placeholder="Paste custom web image URL instead">
-                        </div>
-                        <button type="submit" class="w-full bg-timber-600 hover:bg-timber-700 text-white text-xs font-bold py-3 rounded-lg transition-all shadow-md">
-                            🚀 Upload & Publish Product
-                        </button>
-                    </form>
+                    <h4 class="font-serif text-base font-bold text-stone-900 mb-2">Image Setup Instructions</h4>
+                    <ul class="list-decimal list-inside text-xs text-stone-600 space-y-2 leading-relaxed">
+                        <li>Navigate to your GitHub repository: <strong>Dinesh466/maha</strong>.</li>
+                        <li>Add your image directly inside its corresponding category folder (e.g., upload bed images into the <code>beds</code> folder).</li>
+                        <li>Format file names neatly, e.g., <code>Burma-Teak-Bed.jpg</code>. The website automatically formats this to read as <strong>"Burma Teak Bed"</strong> in your gallery!</li>
+                    </ul>
                 </div>
             </div>
             <!-- Footer -->
             <div class="p-6 bg-stone-50 border-t border-stone-100 text-center text-xs text-stone-500">
-                Data is securely stored in your local session data storage.
+                Powered by GitHub Content Delivery API
             </div>
         </div>
     </div>
@@ -209,20 +204,20 @@
 
     <!-- Stats Section -->
     <section class="bg-timber-50 py-12 px-4 relative -mt-10 z-20 max-w-6xl mx-auto rounded-2xl shadow-xl border border-timber-200/50">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 divide-y md:divide-y-0 md:divide-x divide-timber-200">
-            <div class="text-center md:px-4 py-4 md:py-0">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 divide-y md:divide-y-0 md:divide-x divide-timber-200 text-center">
+            <div class="py-4 md:py-0">
                 <div class="text-4xl lg:text-5xl font-serif font-extrabold text-timber-800">25+</div>
                 <div class="text-xs font-bold uppercase tracking-wider text-stone-500 mt-2" id="stat-experience">Years of Wood Experience</div>
             </div>
-            <div class="text-center md:px-4 py-4 md:py-0 border-t-0">
+            <div class="py-4 md:py-0 border-t-0">
                 <div class="text-4xl lg:text-5xl font-serif font-extrabold text-timber-800">1K+</div>
                 <div class="text-xs font-bold uppercase tracking-wider text-stone-500 mt-2" id="stat-projects">Success Projects Done</div>
             </div>
-            <div class="text-center md:px-4 py-4 md:py-0">
+            <div class="py-4 md:py-0">
                 <div class="text-4xl lg:text-5xl font-serif font-extrabold text-timber-800">500+</div>
                 <div class="text-xs font-bold uppercase tracking-wider text-stone-500 mt-2" id="stat-buildings">Buildings Completed</div>
             </div>
-            <div class="text-center md:px-4 py-4 md:py-0">
+            <div class="py-4 md:py-0">
                 <div class="text-4xl lg:text-5xl font-serif font-extrabold text-timber-800">1 Year</div>
                 <div class="text-xs font-bold uppercase tracking-wider text-stone-500 mt-2" id="stat-warranty">Craftsmanship Warranty</div>
             </div>
@@ -281,15 +276,22 @@
                 <h2 class="font-serif text-3xl lg:text-4xl font-bold text-stone-900 mb-4" id="sec2-title">Premium Wood Gallery</h2>
                 <div class="w-16 h-1 bg-timber-600 mx-auto rounded-full mb-8"></div>
                 
-                <!-- Category Filter Buttons (Populated dynamically) -->
-                <div class="flex flex-wrap justify-center gap-3" id="filter-container">
+                <!-- Category Filter Buttons -->
+                <div class="flex flex-wrap justify-center gap-3 mb-6" id="filter-container">
                     <!-- Filter buttons will render dynamically here -->
+                </div>
+
+                <div class="text-xs text-stone-400 italic mb-4 text-center">
+                    <span id="sync-notice">Scanning images directly from GitHub repository...</span>
                 </div>
             </div>
 
             <!-- Showcase Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
-                <!-- Portfolio items will render dynamically here based on selected filters -->
+                <!-- Skeletons will load initially here, replaced by dynamic GitHub image assets -->
+                <div class="skeleton h-80 rounded-2xl"></div>
+                <div class="skeleton h-80 rounded-2xl"></div>
+                <div class="skeleton h-80 rounded-2xl"></div>
             </div>
         </div>
     </section>
@@ -430,7 +432,7 @@
     </div>
 
     <!-- Floating WhatsApp Action Link -->
-    <a href="https://wa.me/919293343999?text=Hi" class="whatsapp-btn shadow-amber-950/20" target="_blank" id="ws-btn">
+    <a href="https://wa.me/919293343999?text=Hi%20Sri%20Mahalakshmi%20Timber%20Depo,%20I'm%20visiting%20your%20website." class="whatsapp-btn shadow-amber-950/20" target="_blank" id="ws-btn">
         <i class="fa-brands fa-whatsapp text-xl"></i> <span id="ws-btn-text">Chat on WhatsApp</span>
     </a>
 
@@ -441,8 +443,16 @@
 
     <!-- Application Logic -->
     <script>
-        // Default category configuration mapping
-        let categories = JSON.parse(localStorage.getItem('depo_categories')) || [
+        // REPLACE THIS URL with your deployed Google Sheet Apps Script Web App URL to collect leads
+        const googleSheetsUrl = 'YOUR_DEPLOYED_URL_HERE';
+
+        // GitHub Repository Constants
+        const GITHUB_OWNER = 'Dinesh466';
+        const GITHUB_REPO = 'maha';
+        const GITHUB_BRANCH = 'main';
+
+        // Category configurations matching your custom specifications
+        const categories = [
             { id: 'all', en: 'All', te: 'అన్నీ' },
             { id: 'windows', en: 'Windows', te: 'కిటికీలు' },
             { id: 'doorways', en: 'Doorways', te: 'ద్వార బంధాలు' },
@@ -452,67 +462,68 @@
             { id: 'beds', en: 'Beds', te: 'మంచాలు' }
         ];
 
-        // Default list of high quality showcase items mapped directly to specifications
-        let defaultProducts = [
+        // High Quality default fallback products when GitHub has rate limit or no images
+        const defaultProducts = [
             {
-                id: 'p1',
+                id: 'df-1',
                 category: 'windows',
                 img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80',
-                enName: 'Teak Wooden Windows',
-                teName: 'టేకు కిటికీ చట్రాలు',
-                enDesc: 'Expertly carved premium Teak windows for natural elegance.',
-                teDesc: 'సహజమైన అందం కోసం నైపుణ్యంగా చెక్కబడిన టేకు కిటికీలు.'
+                enName: 'Teak Wood Window Frame',
+                teName: 'టేకు కిటికీ చట్రం',
+                enDesc: 'Handcrafted premium wood frames built to insulate and secure.',
+                teDesc: 'గాలి మరియు పటిష్టత కొరకు మలచిన టేకు కిటికీ చట్రాలు.'
             },
             {
-                id: 'p2',
+                id: 'df-2',
                 category: 'doorways',
                 img: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=600&q=80',
                 enName: 'Burma Teak Doorway Frame',
                 teName: 'బర్మా టేకు ద్వారబంధం',
-                enDesc: 'Solid frames offering extreme durability and resistance.',
-                teDesc: 'గట్టి బర్మా టేకు కలపతో నిర్మితమైన ద్వారబంధాలు.'
+                enDesc: 'Robust and heavy solid doorway frames built from seasoned timber.',
+                teDesc: 'భద్రత మరియు అందం కోసం నిర్మించిన బరువైన ద్వారబంధం.'
             },
             {
-                id: 'p3',
+                id: 'df-3',
                 category: 'window-doors',
                 img: 'https://images.unsplash.com/photo-1542125387-c71274d94f0a?auto=format&fit=crop&w=600&q=80',
-                enName: 'Seasoned Window Doors',
-                teName: 'కిటికీ తలుపులు',
-                enDesc: 'Termite-treated, polished window shutter doors.',
-                teDesc: 'చదలు పట్టని, లగ్జరీ పాలిష్ కిటికీ రెక్కలు.'
+                enName: 'Modern Polish Window Panel',
+                teName: 'కిటికీ తలుపుల రెక్కలు',
+                enDesc: 'High durability panels coated in glossy water resistant coat.',
+                teDesc: 'నీరు మరియు ఎండకు తట్టుకోగల మెరిసే పాలిష్ కిటికీ రెక్కలు.'
             },
             {
-                id: 'p4',
+                id: 'df-4',
                 category: 'doorway-doors',
                 img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80',
-                enName: 'Main Doorway Door panel',
-                teName: 'ప్రధాన తలుపు',
-                enDesc: 'Royal carving doorway panels built from solid timber.',
-                teDesc: 'హస్తకళతో కూడిన రాచరిక టేకు ప్రధాన తలుపులు.'
+                enName: 'Exquisite Doorway Panel',
+                teName: 'సింహద్వారం తలుపు రెక్క',
+                enDesc: 'Royal patterns hand-carved into selected hardwood materials.',
+                teDesc: 'అద్భుతమైన డిజైన్లతో చెక్కబడిన ప్రధాన తలుపులు.'
             },
             {
-                id: 'p5',
+                id: 'df-5',
                 category: 'doorway-mess-window',
                 img: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80',
-                enName: 'Doorway Mesh Windows',
-                teName: 'మెష్ తలుపులు & కిటికీలు',
-                enDesc: 'Custom wire netting frames protecting against insects.',
-                teDesc: 'దోమలు రాకుండా నిర్మించబడే మెష్ ఫ్రేములు.'
+                enName: 'Hardwood Mesh Guard Panel',
+                teName: 'మెష్ రక్షణ కిటికీ / తలుపు',
+                enDesc: 'Heavy-duty steel mesh screen nested inside a strong teak outline.',
+                teDesc: 'దోమలు రాకుండా నిర్మించబడే సురక్షితమైన గ్రిడ్ మెష్ తలుపులు.'
             },
             {
-                id: 'p6',
+                id: 'df-6',
                 category: 'beds',
                 img: 'https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=600&q=80',
-                enName: 'Solid Wood Bed Frame',
-                teName: 'టేకు మంచాలు',
-                enDesc: 'King/Queen heavy duty teak beds with custom carvings.',
-                teDesc: 'అందమైన నగిషీలతో కూడిన టేకు డబుల్ కాట్ మంచం.'
+                enName: 'Teak Wooden Bed Frame',
+                teName: 'రాచరిక టేకు డబుల్ బెడ్',
+                enDesc: 'Heirloom quality King & Queen-sized robust furniture piece.',
+                teDesc: 'అందమైన చెక్కడాలతో కూడిన సౌకర్యవంతమైన టేకు డబుల్ మంచం.'
             }
         ];
 
-        let products = JSON.parse(localStorage.getItem('depo_products')) || defaultProducts;
+        let activeProducts = [...defaultProducts];
+        let currentLang = 'en';
 
-        // Dual Language Translations Engine Mapping
+        // Translation Mapping Matrix
         const translations = {
             en: {
                 badge: "★ 5.0 Google Rated",
@@ -547,7 +558,6 @@
                 btnCall: "Call Directly",
                 wsBtn: "Chat on WhatsApp",
                 footText: "All Rights Reserved.",
-                // Modal specific translations
                 modalTitle: "Get Custom Pricing",
                 modalSub: "Leave your details and our team will get in touch with a customized quote!",
                 lblModalName: "Full Name",
@@ -556,11 +566,8 @@
                 btnModalSubmit: "Submit & Request Callback",
                 modalSuccessTitle: "Thank You!",
                 modalSuccessDesc: "Your details have been successfully submitted. Our representative will contact you shortly.",
-                // Admin drawer translations
-                lblAdminBtn: "Owner Login",
-                lblDrawerTitle: "Showcase Manager",
-                lblDrawerSec1: "Create Custom Product Category",
-                lblDrawerSec2: "Add New Product to Gallery"
+                lblAdminBtn: "GitHub CMS Sync",
+                lblDrawerTitle: "GitHub Showcase Manager"
             },
             te: {
                 badge: "★ 5.0 గూగుల్ రేటింగ్",
@@ -578,7 +585,7 @@
                 statWarranty: "హస్తకళ గ్యారెంటీ",
                 sec1Title: "మా ప్రత్యేకతలు",
                 card1Title: "టింబర్ డిపో",
-                card1Desc: "నిర్మాణ అవసరాల కొరకు మేలు రకమైన టేకు, రోజ్‌వుడ్, వేప మరియు జామ కలప దిమ్మలు మరియు కోత కలప హోల్‌సేల్ సరఫరా.",
+                card1Desc: "निర్మణ అవసరాల కొరకు మేలు రకమైన టేకు, రోజ్‌వుడ్, వేప మరియు జామ కలప దిమ్మలు మరియు కోత కలప హోల్‌సేల్ సరఫరా.",
                 card2Title: "కస్టమ్ ఫర్నిచర్",
                 card2Desc: "మీరు కోరిన సైజులకు అనుగుణంగా తయారు చేయబడిన డైనింగ్ టేబుల్‌లు, లగ్జరీ సోఫాలు, గట్టి మంచాలు మరియు స్టడీ టేబుళ్లు.",
                 card3Desc: "ఇంటి ఇంటీరియర్ పనులు. మోడ్రన్ వార్డ్‌రోబ్‌లు, టీవీ యూనిట్లు, లగ్జరీ కిచెన్ కప్‌బోర్డులు మరియు అద్భుతమైన సీలింగ్ డిజైన్లు.",
@@ -595,7 +602,6 @@
                 btnCall: "డైరెక్ట్ ఫోన్ కాల్",
                 wsBtn: "వాట్సాప్‌లో చాట్ చేయండి",
                 footText: "సర్వ హక్కులు ప్రత్యేకించబడినవి.",
-                // Modal specific translations
                 modalTitle: "కస్టమ్ కొటేషన్ పొందండి",
                 modalSub: "మీ వివరాలను క్రింద నమోదు చేయండి, మా ప్రతినిధి వెంటనే మీకు కాల్ చేసి వివరాలు తెలియజేస్తారు!",
                 lblModalName: "పూర్తి పేరు",
@@ -604,32 +610,82 @@
                 btnModalSubmit: "సమర్పించి కాల్ అడగండి",
                 modalSuccessTitle: "ధన్యవాదాలు!",
                 modalSuccessDesc: "మీ వివరాలు విజయవంతంగా అందాయి. మా ప్రతినిధి అతి త్వరలోనే మిమ్మల్ని సంప్రదిస్తారు.",
-                // Admin drawer translations
-                lblAdminBtn: "యాజమాన్యం లాగిన్",
-                lblDrawerTitle: "గ్యాలరీ మేనేజర్",
-                lblDrawerSec1: "కస్టమ్ ప్రోడక్ట్ వర్గాన్ని జోడించండి",
-                lblDrawerSec2: "కొత్త వస్తువును గ్యాలరీకి అప్‌లోడ్ చేయండి"
+                lblAdminBtn: "GitHub CMS సింక్",
+                lblDrawerTitle: "గ్యాలరీ మేనేజర్"
             }
         };
 
-        const btnLangEn = document.getElementById('btn-lang-en');
-        const btnLangTe = document.getElementById('btn-lang-te');
-        let currentLang = 'en';
+        // Clean and format file names from GitHub to look like professional product titles
+        function cleanName(filename) {
+            let nameWithoutExt = filename.substring(0, filename.lastIndexOf('.')) || filename;
+            return nameWithoutExt
+                .replace(/[-_]/g, ' ')
+                .replace(/\b\w/g, c => c.toUpperCase());
+        }
 
-        // Function to render portfolio filter buttons
+        // Programmatically search through your GitHub Repository via REST API for dynamic assets
+        async function fetchGitHubShowcase() {
+            const syncStatus = document.getElementById('sync-status');
+            if (syncStatus) syncStatus.classList.remove('hidden');
+
+            let tempProducts = [];
+            // We search each active directory sequentially
+            const fetchPromises = categories.filter(c => c.id !== 'all').map(async (category) => {
+                const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${category.id}?ref=${GITHUB_BRANCH}`;
+                try {
+                    const response = await fetch(url);
+                    if (!response.ok) return; // Directory doesn't exist yet, bypass
+                    const files = await response.json();
+                    
+                    if (Array.isArray(files)) {
+                        files.forEach((file) => {
+                            // Target image file matches
+                            if (file.type === 'file' && /\.(jpe?g|png|webp|svg|gif)$/i.test(file.name)) {
+                                const cleanTitle = cleanName(file.name);
+                                tempProducts.push({
+                                    id: file.sha,
+                                    category: category.id,
+                                    img: file.download_url || `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/${category.id}/${file.name}`,
+                                    enName: cleanTitle,
+                                    teName: `${category.te} - ${cleanTitle}`,
+                                    enDesc: `Authentic wooden unit scanned dynamically from our repository folder.`,
+                                    teDesc: `మా గ్యాలరీ ఫోల్డర్ నుండి నేరుగా స్కాన్ చేయబడిన కలప వస్తువు.`
+                                });
+                            }
+                        });
+                    }
+                } catch (e) {
+                    console.error("Error connecting to GitHub repository structure:", e);
+                }
+            });
+
+            await Promise.all(fetchPromises);
+
+            if (syncStatus) syncStatus.classList.add('hidden');
+
+            if (tempProducts.length > 0) {
+                activeProducts = tempProducts;
+                localStorage.setItem('cached_showcase_products', JSON.stringify(activeProducts));
+                localStorage.setItem('cached_showcase_time', Date.now().toString());
+                document.getElementById('sync-notice').innerText = "✅ Synchronized in real-time with your GitHub repository!";
+            } else {
+                // If repository is empty or hasn't created directories, fallback gracefully
+                activeProducts = [...defaultProducts];
+                document.getElementById('sync-notice').innerText = "⚠️ No repository images loaded. Showing showroom defaults.";
+            }
+            renderProducts('all');
+        }
+
+        // Render filter triggers dynamically
         function renderFilters() {
-            const filterContainer = document.getElementById('filter-container');
-            filterContainer.innerHTML = '';
-            
+            const container = document.getElementById('filter-container');
+            container.innerHTML = '';
             categories.forEach((cat, idx) => {
                 const btn = document.createElement('button');
-                btn.id = `filter-${cat.id}`;
                 btn.className = `filter-btn px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 ${
                     idx === 0 ? 'bg-timber-800 text-white shadow-md' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
                 }`;
                 btn.innerText = currentLang === 'en' ? cat.en : cat.te;
-                
-                // Programmatic filtering event mapping
                 btn.addEventListener('click', () => {
                     document.querySelectorAll('.filter-btn').forEach(b => {
                         b.className = "filter-btn px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 bg-stone-100 text-stone-600 hover:bg-stone-200";
@@ -637,57 +693,56 @@
                     btn.className = "filter-btn px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 bg-timber-800 text-white shadow-md";
                     renderProducts(cat.id);
                 });
-
-                filterContainer.appendChild(btn);
+                container.appendChild(btn);
             });
         }
 
-        // Function to render products in the catalog
+        // Render target items inside active grid
         function renderProducts(filterCategory = 'all') {
             const grid = document.getElementById('portfolio-grid');
             grid.innerHTML = '';
 
             const filtered = filterCategory === 'all' 
-                ? products 
-                : products.filter(p => p.category === filterCategory);
+                ? activeProducts 
+                : activeProducts.filter(p => p.category === filterCategory);
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-16 text-center text-stone-500">
+                        <i class="fa-regular fa-folder-open text-4xl mb-3"></i>
+                        <p class="text-sm">No images uploaded inside the "${filterCategory}" folder on GitHub yet.</p>
+                    </div>
+                `;
+                return;
+            }
 
             filtered.forEach(p => {
                 const card = document.createElement('div');
-                card.className = `portfolio-item group relative overflow-hidden rounded-2xl shadow-md h-[320px] transition-all duration-500 hover:-translate-y-1`;
+                card.className = `portfolio-item group relative overflow-hidden rounded-2xl shadow-md h-[320px] transition-all duration-500 hover:-translate-y-1 bg-stone-900`;
                 
                 const catObj = categories.find(c => c.id === p.category);
                 const tagLabel = catObj ? (currentLang === 'en' ? catObj.en : catObj.te) : 'PRODUCT';
 
                 card.innerHTML = `
-                    <img src="${p.img}" alt="${p.enName}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <img src="${p.img}" alt="${p.enName}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=80'">
                     <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/40 to-transparent"></div>
                     <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
                         <span class="text-[10px] font-bold uppercase tracking-wider bg-amber-500 text-stone-950 px-2.5 py-1 rounded mb-2 inline-block">${tagLabel}</span>
                         <h4 class="font-serif text-lg font-bold text-white mb-1">${currentLang === 'en' ? p.enName : p.teName}</h4>
-                        <p class="text-xs text-stone-300">${currentLang === 'en' ? p.enDesc : p.teDesc}</p>
+                        <p class="text-xs text-stone-300 leading-relaxed">${currentLang === 'en' ? p.enDesc : p.teDesc}</p>
                     </div>
                 `;
                 grid.appendChild(card);
             });
         }
 
-        // Admin categories select options populations
-        function updateCategoryDropdown() {
-            const select = document.getElementById('prodCategory');
-            select.innerHTML = '';
-            categories.filter(c => c.id !== 'all').forEach(cat => {
-                const opt = document.createElement('option');
-                opt.value = cat.id;
-                opt.innerText = cat.en;
-                select.appendChild(opt);
-            });
-        }
-
         function setLanguage(lang) {
             currentLang = lang;
             localStorage.setItem('selectedLang', lang);
-            
-            // Switch button highlighting styles
+
+            const btnLangEn = document.getElementById('btn-lang-en');
+            const btnLangTe = document.getElementById('btn-lang-te');
+
             if (lang === 'en') {
                 btnLangEn.className = "text-xs px-3 py-1.5 rounded-full font-bold transition-all duration-300 bg-timber-600 text-white shadow-md";
                 btnLangTe.className = "text-xs px-3 py-1.5 rounded-full font-bold transition-all duration-300 text-stone-400 hover:text-white";
@@ -696,7 +751,7 @@
                 btnLangEn.className = "text-xs px-3 py-1.5 rounded-full font-bold transition-all duration-300 text-stone-400 hover:text-white";
             }
 
-            // Apply global translations mapped directly to DOM elements
+            // Global Localization Swapper Mapping
             document.getElementById('txt-badge').innerText = translations[lang].badge;
             document.getElementById('nav-about').innerText = translations[lang].navAbout;
             document.getElementById('nav-gallery').innerText = translations[lang].navGallery;
@@ -736,7 +791,7 @@
             document.getElementById('ws-btn-text').innerText = translations[lang].wsBtn;
             document.getElementById('foot-text').innerText = translations[lang].footText;
 
-            // Modal specific
+            // Modal
             document.getElementById('modalTitle').innerText = translations[lang].modalTitle;
             document.getElementById('modalSub').innerText = translations[lang].modalSub;
             document.getElementById('lblModalName').innerText = translations[lang].lblModalName;
@@ -746,26 +801,24 @@
             document.getElementById('modalSuccessTitle').innerText = translations[lang].modalSuccessTitle;
             document.getElementById('modalSuccessDesc').innerText = translations[lang].modalSuccessDesc;
 
-            // Admin panel translations
+            // Drawer
             document.getElementById('lbl-admin-btn').innerText = translations[lang].lblAdminBtn;
             document.getElementById('lbl-drawer-title').innerText = translations[lang].lblDrawerTitle;
-            document.getElementById('lbl-drawer-sec1').innerText = translations[lang].lblDrawerSec1;
-            document.getElementById('lbl-drawer-sec2').innerText = translations[lang].lblDrawerSec2;
 
-            // Rerender layout blocks with fresh localizations
             renderFilters();
-            renderProducts();
+            renderProducts('all');
         }
 
-        // Programmatic Event Listeners for Languages
-        btnLangEn.addEventListener('click', () => setLanguage('en'));
-        btnLangTe.addEventListener('click', () => setLanguage('te'));
+        // Event Listeners registration
+        document.getElementById('btn-lang-en').addEventListener('click', () => setLanguage('en'));
+        document.getElementById('btn-lang-te').addEventListener('click', () => setLanguage('te'));
 
-        // Drawer Controls
+        // Drawer controllers
         const btnAdminToggle = document.getElementById('btn-admin-toggle');
         const btnAdminClose = document.getElementById('btn-admin-close');
         const adminDrawerOverlay = document.getElementById('adminDrawerOverlay');
         const adminDrawer = document.getElementById('adminDrawer');
+        const btnGitHubSync = document.getElementById('btn-github-sync');
 
         function toggleAdminDrawer(show) {
             if(show) {
@@ -783,81 +836,12 @@
             if(e.target === adminDrawerOverlay) toggleAdminDrawer(false);
         });
 
-        // Form Submit: Add Custom Category
-        const formAddCategory = document.getElementById('form-add-category');
-        formAddCategory.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const nameEn = document.getElementById('newCatEn').value.trim();
-            const nameTe = document.getElementById('newCatTe').value.trim();
-            const id = nameEn.toLowerCase().replace(/[^a-z0-9]/g, '-');
-
-            if(categories.some(c => c.id === id)) {
-                alert('This category already exists.');
-                return;
-            }
-
-            categories.push({ id, en: nameEn, te: nameTe });
-            localStorage.setItem('depo_categories', JSON.stringify(categories));
-            
-            formAddCategory.reset();
-            updateCategoryDropdown();
-            renderFilters();
-            renderProducts();
-            toggleAdminDrawer(false);
+        // Trigger synchronization manually
+        btnGitHubSync.addEventListener('click', () => {
+            fetchGitHubShowcase();
         });
 
-        // Form Submit: Add New Product Showcase Card
-        const formAddProduct = document.getElementById('form-add-product');
-        formAddProduct.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const category = document.getElementById('prodCategory').value;
-            const enName = document.getElementById('prodNameEn').value.trim();
-            const teName = document.getElementById('prodNameTe').value.trim();
-            const enDesc = document.getElementById('prodDescEn').value.trim();
-            const teDesc = document.getElementById('prodDescTe').value.trim();
-            const urlInput = document.getElementById('prodUrl').value.trim();
-            const fileInput = document.getElementById('prodFile').files[0];
-
-            let imgUrl = urlInput || 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=80';
-
-            const addAndSave = (url) => {
-                const newProduct = {
-                    id: 'p-' + Date.now(),
-                    category,
-                    img: url,
-                    enName,
-                    teName,
-                    enDesc,
-                    teDesc
-                };
-                products.push(newProduct);
-                localStorage.setItem('depo_products', JSON.stringify(products));
-                
-                formAddProduct.reset();
-                renderProducts();
-                toggleAdminDrawer(false);
-            };
-
-            // If a file upload is used, read it as an ObjectURL/base64 so it previews locally instantly
-            if(fileInput) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    addAndSave(event.target.result);
-                };
-                reader.readAsDataURL(fileInput);
-            } else {
-                addAndSave(imgUrl);
-            }
-        });
-
-        // On Load initialization
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('selectedLang') || 'en';
-            setLanguage(savedLang);
-            updateCategoryDropdown();
-        });
-
-        // 30-Second Modal Logic
+        // Modal & lead logic
         const leadModal = document.getElementById('leadModal');
         const closeModal = document.getElementById('closeModal');
         const leadForm = document.getElementById('leadForm');
@@ -875,7 +859,7 @@
             localStorage.setItem('leadClosed', 'true');
         }
 
-        // Timer triggers after 30 seconds
+        // 30 seconds timer trigger
         setTimeout(() => {
             const submitted = localStorage.getItem('leadCaptured');
             const closed = localStorage.getItem('leadClosed');
@@ -885,57 +869,60 @@
         }, 30000); // 30 seconds
 
         closeModal.addEventListener('click', hideModal);
-
-        // Click outside modal block to close
         leadModal.addEventListener('click', (e) => {
-            if (e.target === leadModal) {
-                hideModal();
-            }
+            if(e.target === leadModal) hideModal();
         });
 
-        // Form Submit handler
-        if (leadForm) {
-            leadForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                
-                const nameVal = document.getElementById('modalName').value;
-                const phoneVal = document.getElementById('modalPhone').value;
-                const emailVal = document.getElementById('modalEmail').value;
+        // Lead submission handler
+        leadForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nameVal = document.getElementById('modalName').value;
+            const phoneVal = document.getElementById('modalPhone').value;
+            const emailVal = document.getElementById('modalEmail').value;
 
-                // 1. Save data locally on the user's browser
-                const leadDetails = { name: nameVal, phone: phoneVal, email: emailVal, timestamp: new Date().toISOString() };
-                localStorage.setItem('leadDetails', JSON.stringify(leadDetails));
-                localStorage.setItem('leadCaptured', 'true');
+            localStorage.setItem('leadCaptured', 'true');
 
-                // 2. Submit programmatically to Google Sheets
-                // REPLACE THIS URL with your actual Google Apps Script Web App URL from the guide
-                const googleSheetsUrl = 'YOUR_GOOGLE_SHEETS_WEBAPP_URL_HERE';
-                
-                if (googleSheetsUrl && googleSheetsUrl !== 'YOUR_GOOGLE_SHEETS_WEBAPP_URL_HERE') {
-                    const formData = new FormData();
-                    formData.append('Name', nameVal);
-                    formData.append('Phone', phoneVal);
-                    formData.append('Email', emailVal);
-                    formData.append('Timestamp', new Date().toLocaleString());
+            // Dispatch payload to Google Sheets Web App
+            if (googleSheetsUrl && googleSheetsUrl !== 'YOUR_DEPLOYED_URL_HERE') {
+                const formData = new FormData();
+                formData.append('Name', nameVal);
+                formData.append('Phone', phoneVal);
+                formData.append('Email', emailVal);
+                formData.append('Timestamp', new Date().toLocaleString());
 
-                    fetch(googleSheetsUrl, {
-                        method: 'POST',
-                        body: formData,
-                        mode: 'no-cors' // Allows submitting without strict CORS errors
-                    })
-                    .then(() => {
-                        console.log('Lead saved to Google Sheet successfully.');
-                    })
-                    .catch((error) => {
-                        console.error('Error sending lead to Google Sheet:', error);
-                    });
-                }
+                fetch(googleSheetsUrl, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                }).then(() => {
+                    console.log('Lead pushed successfully.');
+                }).catch(err => {
+                    console.error('Error delivering sheet payload:', err);
+                });
+            }
 
-                // Switch view inside the card to Success State immediately
-                modalFormContainer.classList.add('hidden');
-                modalSuccess.classList.remove('hidden');
-            });
-        }
+            modalFormContainer.classList.add('hidden');
+            modalSuccess.classList.remove('hidden');
+        });
+
+        // Initial setup on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('selectedLang') || 'en';
+            setLanguage(savedLang);
+
+            // Attempt loading dynamic cache from prior scan to bypass GitHub REST API limits
+            const cachedProducts = localStorage.getItem('cached_showcase_products');
+            const cachedTime = localStorage.getItem('cached_showcase_time');
+
+            // Cache is valid for 10 minutes
+            if (cachedProducts && cachedTime && (Date.now() - parseInt(cachedTime) < 600000)) {
+                activeProducts = JSON.parse(cachedProducts);
+                document.getElementById('sync-notice').innerText = "⚡ Loading gallery content from local browser cache.";
+                renderProducts('all');
+            } else {
+                fetchGitHubShowcase();
+            }
+        });
     </script>
 </body>
 </html>
