@@ -92,7 +92,7 @@
         }
         /* Skeleton placeholder animation for image loads */
         .skeleton {
-            background: linear-gradient(90deg, #E6D5C1 25%, #FAF6F0 50%, #E6D5C1 75%);
+            background: linear-gradient(90deg, #E2D3C1 25%, #F4ECE1 50%, #E2D3C1 75%);
             background-size: 200% 100%;
             animation: loading 1.5s infinite;
         }
@@ -138,7 +138,7 @@
         </div>
     </header>
 
-    <!-- Admin Showcase Drawer / Modal Tool -->
+    <!-- Admin Showcase Drawer -->
     <div id="adminDrawerOverlay" class="fixed inset-0 bg-stone-950/60 backdrop-blur-sm z-50 pointer-events-none opacity-0 transition-opacity duration-300 flex justify-end">
         <div id="adminDrawer" class="admin-drawer w-full max-w-md bg-white h-full shadow-2xl flex flex-col justify-between border-l border-timber-100">
             <!-- Header -->
@@ -156,28 +156,51 @@
                 <div>
                     <h4 class="font-serif text-base font-bold text-stone-900 mb-2">Live Content Sync</h4>
                     <p class="text-xs text-stone-500 mb-4">
-                        We automatically search and retrieve photos from your GitHub repository folders (`beds/`, `windows/`, etc.). When you upload a new image, run a sync here to force an immediate update of your live website.
+                        Any images you upload into your GitHub category folders will instantly be fetched. Click the sync button below to immediately clear local cache and download fresh uploads.
                     </p>
                     <button id="btn-github-sync" class="w-full bg-timber-700 hover:bg-timber-800 text-white text-sm font-bold py-3 px-4 rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-rotate"></i> <span>Scan & Synchronize GitHub Now</span>
+                        <i class="fa-solid fa-rotate"></i> <span>Force Sync GitHub Content</span>
                     </button>
                     <div id="sync-status" class="text-xs text-stone-600 mt-2 text-center italic hidden">Scanning repository directories...</div>
                 </div>
 
                 <div class="border-t border-stone-200 my-4"></div>
 
+                <!-- Add Dynamic Custom Category -->
                 <div>
-                    <h4 class="font-serif text-base font-bold text-stone-900 mb-2">Image Setup Instructions</h4>
-                    <ul class="list-decimal list-inside text-xs text-stone-600 space-y-2 leading-relaxed">
-                        <li>Navigate to your GitHub repository: <strong>Dinesh466/maha</strong>.</li>
-                        <li>Add your image directly inside its corresponding category folder (e.g., upload bed images into the <code>beds</code> folder).</li>
-                        <li>Format file names neatly, e.g., <code>Burma-Teak-Bed.jpg</code>. The website automatically formats this to read as <strong>"Burma Teak Bed"</strong> in your gallery!</li>
-                    </ul>
+                    <h4 class="font-serif text-base font-bold text-stone-900 mb-2">Add Custom Category</h4>
+                    <p class="text-xs text-stone-500 mb-3">Add a new custom folder on your GitHub and track it live here!</p>
+                    <form id="customCategoryForm" class="space-y-3">
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase tracking-wider text-stone-500 mb-1">Category Name (English)</label>
+                            <input type="text" id="newCatEn" required class="w-full px-3 py-2 text-xs rounded border border-stone-200 focus:ring-2 focus:ring-timber-500 focus:outline-none" placeholder="e.g. Dining Tables">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase tracking-wider text-stone-500 mb-1">Category Name (Telugu)</label>
+                            <input type="text" id="newCatTe" required class="w-full px-3 py-2 text-xs rounded border border-stone-200 focus:ring-2 focus:ring-timber-500 focus:outline-none" placeholder="e.g. డైనింగ్ టేబుల్స్">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase tracking-wider text-stone-500 mb-1">GitHub Folder Name (Lowercase ID)</label>
+                            <input type="text" id="newCatId" required class="w-full px-3 py-2 text-xs rounded border border-stone-200 focus:ring-2 focus:ring-timber-500 focus:outline-none" placeholder="e.g. dining-tables">
+                        </div>
+                        <button type="submit" class="w-full bg-stone-900 hover:bg-black text-white text-xs font-bold py-2.5 rounded-lg transition-colors">
+                            + Save New Category
+                        </button>
+                    </form>
+                </div>
+
+                <div class="border-t border-stone-200 my-4"></div>
+
+                <div>
+                    <h4 class="font-serif text-base font-bold text-stone-900 mb-2">Real-Time CMS Diagnostics</h4>
+                    <div id="cms-diagnostic-log" class="bg-stone-950 text-[11px] font-mono text-green-400 p-3 rounded-lg h-32 overflow-y-auto">
+                        [Systems initialized] Ready to connect to repository Dinesh466/maha...
+                    </div>
                 </div>
             </div>
             <!-- Footer -->
             <div class="p-6 bg-stone-50 border-t border-stone-100 text-center text-xs text-stone-500">
-                Powered by GitHub Content Delivery API
+                Powered by Headless GitHub API Integration
             </div>
         </div>
     </div>
@@ -281,14 +304,15 @@
                     <!-- Filter buttons will render dynamically here -->
                 </div>
 
-                <div class="text-xs text-stone-400 italic mb-4 text-center">
-                    <span id="sync-notice">Scanning images directly from GitHub repository...</span>
+                <div class="text-xs text-stone-400 italic mb-4 text-center flex items-center justify-center gap-2">
+                    <span class="inline-block w-2 h-2 rounded-full bg-green-500 animate-ping"></span>
+                    <span id="sync-notice">Scanning direct image folders inside GitHub: Dinesh466/maha...</span>
                 </div>
             </div>
 
             <!-- Showcase Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
-                <!-- Skeletons will load initially here, replaced by dynamic GitHub image assets -->
+                <!-- Skeleton items are displayed during load, replaced dynamically with real files -->
                 <div class="skeleton h-80 rounded-2xl"></div>
                 <div class="skeleton h-80 rounded-2xl"></div>
                 <div class="skeleton h-80 rounded-2xl"></div>
@@ -381,7 +405,7 @@
         </div>
     </section>
 
-    <!-- 30-Second Lead Generation Form Modal -->
+    <!-- 10-Second Lead Generation Form Modal -->
     <div id="leadModal" class="fixed inset-0 z-50 flex items-center justify-center px-4 bg-stone-950/80 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-500">
         <div class="bg-white rounded-3xl overflow-hidden max-w-md w-full shadow-2xl border border-timber-100 transform scale-90 transition-all duration-500 relative">
             
@@ -451,9 +475,9 @@
         const GITHUB_REPO = 'maha';
         const GITHUB_BRANCH = 'main';
 
-        // Category configurations matching your custom specifications
-        const categories = [
-            { id: 'all', en: 'All', te: 'అన్నీ' },
+        // Initial default category configurations
+        let categories = [
+            { id: 'all', en: 'All Products', te: 'అన్ని ఉత్పత్తులు' },
             { id: 'windows', en: 'Windows', te: 'కిటికీలు' },
             { id: 'doorways', en: 'Doorways', te: 'ద్వార బంధాలు' },
             { id: 'window-doors', en: 'Window Doors', te: 'కిటికీ తలుపులు' },
@@ -462,65 +486,7 @@
             { id: 'beds', en: 'Beds', te: 'మంచాలు' }
         ];
 
-        // High Quality default fallback products when GitHub has rate limit or no images
-        const defaultProducts = [
-            {
-                id: 'df-1',
-                category: 'windows',
-                img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80',
-                enName: 'Teak Wood Window Frame',
-                teName: 'టేకు కిటికీ చట్రం',
-                enDesc: 'Handcrafted premium wood frames built to insulate and secure.',
-                teDesc: 'గాలి మరియు పటిష్టత కొరకు మలచిన టేకు కిటికీ చట్రాలు.'
-            },
-            {
-                id: 'df-2',
-                category: 'doorways',
-                img: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=600&q=80',
-                enName: 'Burma Teak Doorway Frame',
-                teName: 'బర్మా టేకు ద్వారబంధం',
-                enDesc: 'Robust and heavy solid doorway frames built from seasoned timber.',
-                teDesc: 'భద్రత మరియు అందం కోసం నిర్మించిన బరువైన ద్వారబంధం.'
-            },
-            {
-                id: 'df-3',
-                category: 'window-doors',
-                img: 'https://images.unsplash.com/photo-1542125387-c71274d94f0a?auto=format&fit=crop&w=600&q=80',
-                enName: 'Modern Polish Window Panel',
-                teName: 'కిటికీ తలుపుల రెక్కలు',
-                enDesc: 'High durability panels coated in glossy water resistant coat.',
-                teDesc: 'నీరు మరియు ఎండకు తట్టుకోగల మెరిసే పాలిష్ కిటికీ రెక్కలు.'
-            },
-            {
-                id: 'df-4',
-                category: 'doorway-doors',
-                img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80',
-                enName: 'Exquisite Doorway Panel',
-                teName: 'సింహద్వారం తలుపు రెక్క',
-                enDesc: 'Royal patterns hand-carved into selected hardwood materials.',
-                teDesc: 'అద్భుతమైన డిజైన్లతో చెక్కబడిన ప్రధాన తలుపులు.'
-            },
-            {
-                id: 'df-5',
-                category: 'doorway-mess-window',
-                img: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80',
-                enName: 'Hardwood Mesh Guard Panel',
-                teName: 'మెష్ రక్షణ కిటికీ / తలుపు',
-                enDesc: 'Heavy-duty steel mesh screen nested inside a strong teak outline.',
-                teDesc: 'దోమలు రాకుండా నిర్మించబడే సురక్షితమైన గ్రిడ్ మెష్ తలుపులు.'
-            },
-            {
-                id: 'df-6',
-                category: 'beds',
-                img: 'https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=600&q=80',
-                enName: 'Teak Wooden Bed Frame',
-                teName: 'రాచరిక టేకు డబుల్ బెడ్',
-                enDesc: 'Heirloom quality King & Queen-sized robust furniture piece.',
-                teDesc: 'అందమైన చెక్కడాలతో కూడిన సౌకర్యవంతమైన టేకు డబుల్ మంచం.'
-            }
-        ];
-
-        let activeProducts = [...defaultProducts];
+        let activeProducts = [];
         let currentLang = 'en';
 
         // Translation Mapping Matrix
@@ -585,7 +551,7 @@
                 statWarranty: "హస్తకళ గ్యారెంటీ",
                 sec1Title: "మా ప్రత్యేకతలు",
                 card1Title: "టింబర్ డిపో",
-                card1Desc: "निర్మణ అవసరాల కొరకు మేలు రకమైన టేకు, రోజ్‌వుడ్, వేప మరియు జామ కలప దిమ్మలు మరియు కోత కలప హోల్‌సేల్ సరఫరా.",
+                card1Desc: "నిర్మాణ అవసరాల కొరకు మేలు రకమైన టేకు, రోజ్‌వుడ్, వేప మరియు జామ కలప దిమ్మలు మరియు కోత కలప హోల్‌సేల్ సరఫరా.",
                 card2Title: "కస్టమ్ ఫర్నిచర్",
                 card2Desc: "మీరు కోరిన సైజులకు అనుగుణంగా తయారు చేయబడిన డైనింగ్ టేబుల్‌లు, లగ్జరీ సోఫాలు, గట్టి మంచాలు మరియు స్టడీ టేబుళ్లు.",
                 card3Desc: "ఇంటి ఇంటీరియర్ పనులు. మోడ్రన్ వార్డ్‌రోబ్‌లు, టీవీ యూనిట్లు, లగ్జరీ కిచెన్ కప్‌బోర్డులు మరియు అద్భుతమైన సీలింగ్ డిజైన్లు.",
@@ -604,16 +570,26 @@
                 footText: "సర్వ హక్కులు ప్రత్యేకించబడినవి.",
                 modalTitle: "కస్టమ్ కొటేషన్ పొందండి",
                 modalSub: "మీ వివరాలను క్రింద నమోదు చేయండి, మా ప్రతినిధి వెంటనే మీకు కాల్ చేసి వివరాలు తెలియజేస్తారు!",
-                lblModalName: "పూర్తి పేరు",
+                lblModalName: "పూర్তি పేరు",
                 lblModalPhone: "ఫోన్ నెంబర్",
                 lblModalEmail: "ఇమెయిల్ అడ్రస్",
                 btnModalSubmit: "సమర్పించి కాల్ అడగండి",
                 modalSuccessTitle: "ధన్యవాదాలు!",
                 modalSuccessDesc: "మీ వివరాలు విజయవంతంగా అందాయి. మా ప్రతినిధి అతి త్వరలోనే మిమ్మల్ని సంప్రదిస్తారు.",
-                lblAdminBtn: "GitHub CMS సింక్",
+                lblAdminBtn: "గ్యాలరీ మేనేజర్",
                 lblDrawerTitle: "గ్యాలరీ మేనేజర్"
             }
         };
+
+        // Logger helper for diagnostic text
+        function addLog(message) {
+            const logger = document.getElementById('cms-diagnostic-log');
+            if (logger) {
+                const timestamp = new Date().toLocaleTimeString();
+                logger.innerHTML += `<br>[${timestamp}] ${message}`;
+                logger.scrollTop = logger.scrollHeight;
+            }
+        }
 
         // Clean and format file names from GitHub to look like professional product titles
         function cleanName(filename) {
@@ -624,22 +600,34 @@
         }
 
         // Programmatically search through your GitHub Repository via REST API for dynamic assets
-        async function fetchGitHubShowcase() {
+        async function fetchGitHubShowcase(forceClear = false) {
             const syncStatus = document.getElementById('sync-status');
             if (syncStatus) syncStatus.classList.remove('hidden');
 
+            addLog("Initiating full GitHub content scan...");
             let tempProducts = [];
+            
+            if (forceClear) {
+                addLog("Clearing browser local cache values...");
+                localStorage.removeItem('cached_showcase_products');
+                localStorage.removeItem('cached_showcase_time');
+            }
+
             // We search each active directory sequentially
             const fetchPromises = categories.filter(c => c.id !== 'all').map(async (category) => {
                 const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${category.id}?ref=${GITHUB_BRANCH}`;
                 try {
+                    addLog(`Scanning folder: '${category.id}/'...`);
                     const response = await fetch(url);
-                    if (!response.ok) return; // Directory doesn't exist yet, bypass
+                    if (!response.ok) {
+                        addLog(`Folder '${category.id}/' not created yet or empty in GitHub repo.`);
+                        return; // Directory doesn't exist yet, bypass
+                    }
                     const files = await response.json();
                     
                     if (Array.isArray(files)) {
+                        let count = 0;
                         files.forEach((file) => {
-                            // Target image file matches
                             if (file.type === 'file' && /\.(jpe?g|png|webp|svg|gif)$/i.test(file.name)) {
                                 const cleanTitle = cleanName(file.name);
                                 tempProducts.push({
@@ -651,11 +639,13 @@
                                     enDesc: `Authentic wooden unit scanned dynamically from our repository folder.`,
                                     teDesc: `మా గ్యాలరీ ఫోల్డర్ నుండి నేరుగా స్కాన్ చేయబడిన కలప వస్తువు.`
                                 });
+                                count++;
                             }
                         });
+                        addLog(`Successfully found ${count} image(s) inside '${category.id}/'`);
                     }
                 } catch (e) {
-                    console.error("Error connecting to GitHub repository structure:", e);
+                    addLog(`Error connecting to directory '${category.id}/': ${e.message}`);
                 }
             });
 
@@ -668,10 +658,11 @@
                 localStorage.setItem('cached_showcase_products', JSON.stringify(activeProducts));
                 localStorage.setItem('cached_showcase_time', Date.now().toString());
                 document.getElementById('sync-notice').innerText = "✅ Synchronized in real-time with your GitHub repository!";
+                addLog(`Total synchronized items found in repository: ${tempProducts.length}`);
             } else {
-                // If repository is empty or hasn't created directories, fallback gracefully
-                activeProducts = [...defaultProducts];
-                document.getElementById('sync-notice').innerText = "⚠️ No repository images loaded. Showing showroom defaults.";
+                activeProducts = [];
+                document.getElementById('sync-notice').innerText = "⚠️ No images found in GitHub folders. Go to your repo and upload photos.";
+                addLog("Warning: Complete repository returned zero images. Ensure your folder names match precisely.");
             }
             renderProducts('all');
         }
@@ -707,10 +698,25 @@
                 : activeProducts.filter(p => p.category === filterCategory);
 
             if (filtered.length === 0) {
+                const currentCatName = categories.find(c => c.id === filterCategory);
+                const displayCatName = currentCatName ? (currentLang === 'en' ? currentCatName.en : currentCatName.te) : filterCategory;
+                
                 grid.innerHTML = `
-                    <div class="col-span-full py-16 text-center text-stone-500">
-                        <i class="fa-regular fa-folder-open text-4xl mb-3"></i>
-                        <p class="text-sm">No images uploaded inside the "${filterCategory}" folder on GitHub yet.</p>
+                    <div class="col-span-full py-16 px-6 bg-white border border-dashed border-timber-300 rounded-3xl text-center max-w-lg mx-auto">
+                        <div class="w-16 h-16 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">📁</div>
+                        <h4 class="font-serif text-lg font-bold text-stone-900 mb-2">
+                            ${currentLang === 'en' ? `No images found in '${displayCatName}'` : `'${displayCatName}' ఫోల్డర్ ఖాళీగా ఉంది`}
+                        </h4>
+                        <p class="text-xs text-stone-500 mb-6 leading-relaxed">
+                            ${currentLang === 'en' 
+                                ? `To display your craftsmanship here, log into GitHub and upload image files directly into the folder name: <strong>${filterCategory}/</strong>`
+                                : `ఈ విభాగంలో మీ ఫొటోలను ప్రదర్శించడానికి, మీ GitHub ఖాతాలోకి లాగిన్ అయి <strong>${filterCategory}/</strong> అనే ఫోల్డర్ లో మీ చిత్రాలను అప్‌లోడ్ చేయండి.`
+                            }
+                        </p>
+                        <a href="https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/tree/${GITHUB_BRANCH}" target="_blank" class="inline-flex items-center gap-2 bg-stone-900 hover:bg-black text-white text-xs font-bold px-5 py-3 rounded-xl shadow-md transition-all">
+                            <i class="fa-brands fa-github text-sm"></i>
+                            <span>${currentLang === 'en' ? 'Open GitHub Repository' : 'GitHub రిపోజిటరీ తెరువు'}</span>
+                        </a>
                     </div>
                 `;
                 return;
@@ -819,6 +825,7 @@
         const adminDrawerOverlay = document.getElementById('adminDrawerOverlay');
         const adminDrawer = document.getElementById('adminDrawer');
         const btnGitHubSync = document.getElementById('btn-github-sync');
+        const customCategoryForm = document.getElementById('customCategoryForm');
 
         function toggleAdminDrawer(show) {
             if(show) {
@@ -836,9 +843,31 @@
             if(e.target === adminDrawerOverlay) toggleAdminDrawer(false);
         });
 
+        // Add dynamic category handler
+        customCategoryForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const id = document.getElementById('newCatId').value.toLowerCase().trim().replace(/\s+/g, '-');
+            const en = document.getElementById('newCatEn').value.trim();
+            const te = document.getElementById('newCatTe').value.trim();
+
+            if (categories.find(c => c.id === id)) {
+                alert("This category folder is already being tracked!");
+                return;
+            }
+
+            categories.push({ id, en, te });
+            localStorage.setItem('cached_categories_list', JSON.stringify(categories));
+            
+            addLog(`Successfully saved custom category: '${en}' -> tracking GitHub folder '${id}/'`);
+            customCategoryForm.reset();
+            
+            renderFilters();
+            fetchGitHubShowcase(true);
+        });
+
         // Trigger synchronization manually
         btnGitHubSync.addEventListener('click', () => {
-            fetchGitHubShowcase();
+            fetchGitHubShowcase(true);
         });
 
         // Modal & lead logic
@@ -859,14 +888,14 @@
             localStorage.setItem('leadClosed', 'true');
         }
 
-        // 30 seconds timer trigger
+        // 10 seconds timer trigger
         setTimeout(() => {
             const submitted = localStorage.getItem('leadCaptured');
             const closed = localStorage.getItem('leadClosed');
             if (!submitted && !closed) {
                 showModal();
             }
-        }, 30000); // 30 seconds
+        }, 10000); // 10 seconds
 
         closeModal.addEventListener('click', hideModal);
         leadModal.addEventListener('click', (e) => {
@@ -895,9 +924,9 @@
                     body: formData,
                     mode: 'no-cors'
                 }).then(() => {
-                    console.log('Lead pushed successfully.');
+                    addLog(`Lead for '${nameVal}' successfully logged to Google Sheets.`);
                 }).catch(err => {
-                    console.error('Error delivering sheet payload:', err);
+                    addLog(`Error delivering sheet payload: ${err.message}`);
                 });
             }
 
@@ -908,6 +937,13 @@
         // Initial setup on load
         window.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('selectedLang') || 'en';
+            
+            // Load custom category list from cache if it exists
+            const savedCategories = localStorage.getItem('cached_categories_list');
+            if (savedCategories) {
+                categories = JSON.parse(savedCategories);
+            }
+
             setLanguage(savedLang);
 
             // Attempt loading dynamic cache from prior scan to bypass GitHub REST API limits
@@ -919,6 +955,7 @@
                 activeProducts = JSON.parse(cachedProducts);
                 document.getElementById('sync-notice').innerText = "⚡ Loading gallery content from local browser cache.";
                 renderProducts('all');
+                addLog(`Loaded ${activeProducts.length} items from browser cache.`);
             } else {
                 fetchGitHubShowcase();
             }
