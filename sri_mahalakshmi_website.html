@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sri Mahalakshmi Timber Depo & Furniture Mart</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Editorial Elegance (Marcellus + Plus Jakarta Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        timber: {
+                            50: '#faf6f0',
+                            100: '#f4eae0',
+                            200: '#e5d1be',
+                            300: '#d0b093',
+                            400: '#bc8f6b',
+                            500: '#a36d47',
+                            600: '#8c5535',
+                            700: '#6e402a',
+                            800: '#4e2d1f',
+                            900: '#3a2118',
+                            950: '#20100a',
+                        },
+                        accent: '#D4AF37', // Gold highlights
+                        dark: '#16120F',   // Luxury charcoal
+                    },
+                    fontFamily: {
+                        serif: ['Marcellus', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FAF6F0;
+        }
+        h1, h2, h3 {
+            font-family: 'Marcellus', serif;
+        }
+        /* Custom dynamic transitions */
+        .transition-all-custom {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+    </style>
+</head>
+<body class="text-stone-800 selection:bg-timber-300 selection:text-timber-950">
+
+    <header class="sticky top-0 z-50 bg-dark text-white/90 border-b border-white/10 backdrop-blur-md bg-opacity-95 px-4 md:px-8 py-4 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            
+            <!-- Brand & Trust badge -->
+            <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                <div class="flex items-center gap-3">
+                    <span id="brandName" class="text-2xl font-serif font-bold text-amber-100 tracking-wider">SRI MAHALAKSHMI</span>
+                    <span id="badge" class="bg-amber-400 text-stone-950 text-[11px] font-extrabold px-2 py-0.5 rounded shadow-sm uppercase tracking-wider">★ 5.0 Google Rated</span>
+                </div>
+                <span id="brandSub" class="text-xs text-timber-300 font-semibold uppercase tracking-widest mt-1">TIMBER DEPO & FURNITURE MART</span>
+            </div>
+
+            <!-- Nav Links & Language Switcher -->
+            <div class="flex flex-wrap items-center justify-center gap-6 lg:gap-8">
+                <nav class="flex gap-6 text-sm font-semibold text-stone-300">
+                    <a href="#about" id="navAbout" class="hover:text-accent transition-colors">Our Services</a>
+                    <a href="#gallery" id="navGallery" class="hover:text-accent transition-colors">Showcase</a>
+                    <a href="#contact" id="navContact" class="hover:text-accent transition-colors">Contact Us</a>
+                </nav>
+
+                <!-- Premium Language Toggles -->
+                <div class="flex bg-stone-900 border border-white/10 rounded-full p-1 shadow-inner">
+                    <button id="btn-en" data-lang="en" onclick="switchLanguage('en')" class="lang-btn px-4 py-1.5 text-xs font-bold rounded-full transition-all-custom bg-timber-700 text-white">
+                        English
+                    </button>
+                    <button id="btn-te" data-lang="te" onclick="switchLanguage('te')" class="lang-btn px-4 py-1.5 text-xs font-bold rounded-full transition-all-custom text-neutral-400">
+                        తెలుగు
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <section class="relative bg-stone-950 text-white overflow-hidden py-24 lg:py-36 px-4 md:px-8">
+        <!-- Background Overlay Image -->
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center opacity-25"></div>
+        <!-- Warm lighting radial gradient -->
+        <div class="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent"></div>
+
+        <div class="relative max-w-5xl mx-auto text-center">
+            <h1 id="heroTitle" class="text-4xl md:text-6xl font-serif text-amber-50/95 leading-tight mb-6">
+                Premium Timber. Master Craftsmanship.
+            </h1>
+            <p id="heroDesc" class="text-lg md:text-xl text-stone-300 font-light max-w-3xl mx-auto mb-10 leading-relaxed">
+                Your ultimate destination for wholesale raw timber, custom-designed premium furniture, and architectural woodwork since 1992.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#contact" id="heroBtn" class="bg-timber-500 hover:bg-timber-600 text-white font-bold py-3.5 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all-custom transform hover:-translate-y-0.5 text-center">
+                    Get Free Quote
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 px-4 md:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 id="secAboutTitle" class="text-3xl md:text-4xl font-serif font-bold text-stone-900 tracking-wide">
+                Our Expertise
+            </h2>
+            <div class="w-20 h-1 bg-timber-500 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Card 1: Timber Depot -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border-t-4 border-timber-500 flex flex-col justify-between">
+                <div>
+                    <div class="text-4xl mb-4 text-timber-600">🪵</div>
+                    <h3 id="card1Title" class="text-2xl font-serif text-stone-900 mb-4 font-semibold">Timber Depot</h3>
+                    <p id="card1Desc" class="text-stone-600 text-sm leading-relaxed mb-6">
+                        Sourcing certified, premium grade wholesale timber. Seasoned Burma Teak, Indian Rosewood, Neem, and Mahogany ready for heavy-duty construction and high-end carving.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 2: Custom Furniture -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border-t-4 border-amber-500 flex flex-col justify-between">
+                <div>
+                    <div class="text-4xl mb-4 text-amber-600">🛋️</div>
+                    <h3 id="card2Title" class="text-2xl font-serif text-stone-900 mb-4 font-semibold">Custom Furniture Mart</h3>
+                    <p id="card2Desc" class="text-stone-600 text-sm leading-relaxed mb-6">
+                        Impeccably handcrafted dining tables, custom luxury sofa sets, solid wooden royal beds, and bespoke wardrobes tailored perfectly to your room's dimensions.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 3: Modular Cupboards -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border-t-4 border-stone-800 flex flex-col justify-between">
+                <div>
+                    <div class="text-4xl mb-4 text-stone-800">📐</div>
+                    <h3 id="card3Title" class="text-2xl font-serif text-stone-900 mb-4 font-semibold">Bespoke Woodwork</h3>
+                    <p id="card3Desc" class="text-stone-600 text-sm leading-relaxed mb-6">
+                        Complete end-to-end design, manufacturing, and installations for modern modular kitchen cupboards, TV consoles, partition panels, and designer doors.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-dark text-white py-16 px-6 md:px-12 my-12 text-center max-w-6xl mx-auto rounded-3xl shadow-xl relative overflow-hidden">
+        <div class="absolute inset-0 bg-timber-900 opacity-10"></div>
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <div class="text-amber-400 text-3xl mb-4 tracking-wider">★★★★★</div>
+            <p id="quoteText" class="text-xl md:text-2xl font-serif italic text-amber-50/90 leading-relaxed mb-6">
+                "The finest Teak wood in town and absolute masterpiece carving on our dining table. Outstanding 5-star finish!"
+            </p>
+            <p id="quoteAuthor" class="text-amber-400 font-semibold text-sm tracking-widest uppercase">
+                — Satish Kumar, Verified Customer
+            </p>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-20 px-4 md:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 id="secGalleryTitle" class="text-3xl md:text-4xl font-serif font-bold text-stone-900 tracking-wide">
+                Premium Craftsmanship Gallery
+            </h2>
+            <div class="w-20 h-1 bg-timber-500 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Item 1 -->
+            <div class="group relative overflow-hidden rounded-2xl shadow-md h-80">
+                <img src="https://images.unsplash.com/photo-1581428982868-e410dd047a90?auto=format&fit=crop&w=600&q=80" alt="Luxury Sofa" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent flex items-end p-6">
+                    <h4 id="galSofa" class="text-white text-lg font-serif font-semibold tracking-wide">Luxury Living Room Sofas</h4>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="group relative overflow-hidden rounded-2xl shadow-md h-80">
+                <img src="https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=600&q=80" alt="Teak logs" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent flex items-end p-6">
+                    <h4 id="galTimber" class="text-white text-lg font-serif font-semibold tracking-wide">Premium Teak & Hardwood Logs</h4>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="group relative overflow-hidden rounded-2xl shadow-md h-80">
+                <img src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=600&q=80" alt="Cupboards" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent flex items-end p-6">
+                    <h4 id="galCupboard" class="text-white text-lg font-serif font-semibold tracking-wide">Modular Kitchen & Cupboards</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 px-4 md:px-8 bg-timber-50/50">
+        <div class="max-w-6xl mx-auto">
+            <h2 id="secContactTitle" class="text-3xl md:text-4xl font-serif font-bold text-stone-900 text-center mb-12">
+                Visit Our Showroom
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-stone-100">
+                <!-- Location details -->
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-2xl font-serif font-bold text-stone-900 mb-2">Sri Mahalakshmi Timber Depo</h3>
+                        <div class="w-12 h-1 bg-amber-500 rounded"></div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <p class="text-stone-700">
+                            <strong id="addressLabel" class="block text-stone-900 text-xs uppercase tracking-widest font-semibold mb-1">Store Location:</strong>
+                            <span id="addressText">Opposite Police Station, Main Road, Guntur, Andhra Pradesh - 522001</span>
+                        </p>
+                        <p class="text-stone-700">
+                            <strong id="hoursLabel" class="block text-stone-900 text-xs uppercase tracking-widest font-semibold mb-1">Business Hours:</strong>
+                            <span id="hoursText">Open Daily: 9:00 AM - 7:30 PM</span>
+                        </p>
+                        <p class="text-stone-700">
+                            <strong id="phoneLabel" class="block text-stone-900 text-xs uppercase tracking-widest font-semibold mb-1">Phone Number:</strong>
+                            <span>+91 98765 43210</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Interactive Placeholder Map Frame -->
+                <div class="relative w-full h-80 rounded-2xl overflow-hidden bg-stone-100 border border-stone-200 shadow-inner flex items-center justify-center">
+                    <span class="text-stone-400 font-medium text-sm text-center px-4">Interactive Google Map Location Embed Frame</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Floating Action Button (Points instantly to chat) -->
+    <a id="ws-btn" href="https://wa.me/919876543210?text=Hello,%20I'm%20interested%20in%20high-quality%20timber%20and%20premium%20furniture." target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold py-3.5 px-6 rounded-full shadow-2xl hover:shadow-green-500/20 flex items-center gap-2.5 transition-all-custom transform hover:scale-105">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.907h.004c4.368 0 7.926-3.558 7.93-7.93a7.897 7.897 0 0 0-2.327-5.594zM7.994 14.52a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.69-4.294c-.202-.101-1.194-.588-1.378-.654-.185-.067-.32-.1-.454.1-.134.199-.519.654-.636.782-.118.128-.235.143-.437.042-.202-.101-.853-.314-1.624-.999-.599-.533-1.003-1.193-1.121-1.396-.118-.202-.012-.31.089-.41.09-.091.202-.236.302-.354.1-.118.133-.2.202-.336.067-.134.034-.252-.017-.353-.05-.101-.454-1.094-.622-1.498-.164-.395-.325-.34-.455-.34-.117-.001-.252-.001-.387-.001-.134 0-.353.05-.537.25-.185.201-.706.69-706 1.685s.723 1.954.823 2.086c.1.13 1.42 2.167 3.44 3.04.48.208.854.333 1.144.425.483.153.923.131 1.271.079.388-.058 1.194-.488 1.362-.96.168-.472.168-.875.118-.96-.05-.084-.185-.134-.387-.235z"/>
+        </svg>
+        <span id="whatsappText">Chat on WhatsApp</span>
+    </a>
+
+    <footer class="bg-stone-950 text-stone-500 py-12 px-4 text-center border-t border-white/5">
+        <p id="footerText" class="text-sm">
+            © 2026 Sri Mahalakshmi Timber Depo & Furniture Mart. All Rights Reserved.
+        </p>
+    </footer>
+
+    <script>
+        // Core translation lookup database
+        const translations = {
+            en: {
+                brandName: "SRI MAHALAKSHMI",
+                brandSub: "TIMBER DEPO & FURNITURE MART",
+                navAbout: "Our Services",
+                navGallery: "Showcase",
+                navContact: "Contact Us",
+                badge: "★ 5.0 Google Rated",
+                heroTitle: "Premium Timber. Master Craftsmanship.",
+                heroDesc: "Your ultimate destination for wholesale raw timber, custom-designed premium furniture, and architectural woodwork since 1992.",
+                heroBtn: "Get Free Quote",
+                secAboutTitle: "Our Expertise",
+                card1Title: "Timber Depot",
+                card1Desc: "Sourcing certified, premium grade wholesale timber. Seasoned Burma Teak, Indian Rosewood, Neem, and Mahogany ready for heavy-duty construction and high-end carving.",
+                card2Title: "Custom Furniture Mart",
+                card2Desc: "Impeccably handcrafted dining tables, custom luxury sofa sets, solid wooden royal beds, and bespoke wardrobes tailored perfectly to your room's dimensions.",
+                card3Title: "Bespoke Woodwork",
+                card3Desc: "Complete end-to-end design, manufacturing, and installations for modern modular kitchen cupboards, TV consoles, partition panels, and designer doors.",
+                quoteText: '"The finest Teak wood in town and absolute masterpiece carving on our dining table. Outstanding 5-star finish!"',
+                quoteAuthor: "— Satish Kumar, Verified Customer",
+                secGalleryTitle: "Premium Craftsmanship Gallery",
+                galSofa: "Luxury Living Room Sofas",
+                galTimber: "Premium Teak & Hardwood Logs",
+                galCupboard: "Modular Kitchen & Cupboards",
+                secContactTitle: "Visit Our Showroom",
+                addressLabel: "Store Location:",
+                addressText: "Opposite Police Station, Main Road, Guntur, Andhra Pradesh - 522001",
+                hoursLabel: "Business Hours:",
+                hoursText: "Open Daily: 9:00 AM - 7:30 PM",
+                phoneLabel: "Phone Number:",
+                whatsappText: "Chat on WhatsApp",
+                footerText: "© 2026 Sri Mahalakshmi Timber Depo & Furniture Mart. All Rights Reserved."
+            },
+            te: {
+                brandName: "శ్రీ మహాలక్ష్మి",
+                brandSub: "టింబర్ డిపో & ఫర్నిచర్ మార్ట్",
+                navAbout: "మా సేవలు",
+                navGallery: "గ్యాలరీ",
+                navContact: "సంప్రదించండి",
+                badge: "★ 5.0 గూగుల్ రేటింగ్",
+                heroTitle: "ప్రీమియం కలప. అద్భుతమైన హస్తకళ.",
+                heroDesc: "1992 నుండి హోల్‌సేల్ పచ్చి కలప సామాగ్రి, ఆర్డర్ పై తయారుచేసే ప్రీమియం ఫర్నిచర్ మరియు ఇంటీరియర్ ఉడ్‌వర్క్ కోసం అత్యుత్తమ కేంద్రం.",
+                heroBtn: "ధర అడగండి",
+                secAboutTitle: "మా సేవలు",
+                card1Title: "టింబర్ డిపో",
+                card1Desc: "నిర్మాణాలకు మరియు ఫర్నిచర్ తయారీకి ఉపయోగపడే మేలు రకమైన బర్మా టేకు, రోజ్‌వుడ్ (సీసం), వేప మరియు రాగి కలప హోల్‌సేల్ డిపో.",
+                card2Title: "కస్టమ్ ఫర్నిచర్ మార్ట్",
+                card2Desc: "మీరు కోరిన కొలతలకు అనుగుణంగా తయారు చేయబడిన రాజసం ఉట్టిపడే డైనింగ్ టేబుల్‌లు, లగ్జరీ సోఫాలు, మంచాలు మరియు వార్డ్‌రోబ్‌లు.",
+                card3Title: "ఇంటీరియర్ ఉడ్‌వర్క్",
+                card3Desc: "ఆధునిక మోడ్యులర్ వంటగది క్యాబినెట్‌లు, అందమైన టీవీ యూనిట్లు, పూజ గది డిజైన్లు మరియు చెక్క తలుపుల తయారీ.",
+                quoteText: '"పట్టణంలోనే అత్యుత్తమ టేకు కలప లభిస్తుంది. మా డైనింగ్ టేబుల్ అద్భుతంగా చెక్కారు. అద్భుతమైన 5-స్టార్ ఫినిషింగ్!"',
+                quoteAuthor: "— సతీష్ కుమార్, ధృవీకరించబడిన కస్టమర్",
+                secGalleryTitle: "మా ప్రీమియం హస్తకళా గ్యాలరీ",
+                galSofa: "లగ్జరీ సోఫా సెట్లు",
+                galTimber: "మేలురకం టేకు & గట్టి కలప దుంగలు",
+                galCupboard: "మోడ్యులర్ కిచెన్ & కప్‌బోర్డ్‌లు",
+                secContactTitle: "మా షోరూమ్‌ని సందర్శించండి",
+                addressLabel: "షోరూమ్ चिరునామా:",
+                addressText: "పోలీస్ స్టేషన్ ఎదురుగా, మెయిన్ రోడ్, గుంటూరు, ఆంధ్రప్రదేశ్ - 522001",
+                hoursLabel: "పని వేళలు:",
+                hoursText: "ప్రతిరోజూ: ఉదయం 9:00 - రాత్రి 7:30 వరకు",
+                phoneLabel: "ఫోన్ నంబర్:",
+                whatsappText: "వాట్సాప్‌లో చాట్ చేయండి",
+                footerText: "© 2026 శ్రీ మహాలక్ష్మి టింబర్ డిపో & ఫర్నిచర్ మార్ట్. సర్వ హక్కులు ప్రత్యేకించబడినవి."
+            }
+        };
+
+        // Fully functional language swapper script
+        function switchLanguage(lang) {
+            // 1. Swap active highlight class state on buttons visually
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('bg-timber-700', 'text-white');
+                    btn.classList.remove('text-neutral-400');
+                } else {
+                    btn.classList.remove('bg-timber-700', 'text-white');
+                    btn.classList.add('text-neutral-400');
+                }
+            });
+
+            // 2. Set DOM lang attribute standard
+            document.documentElement.lang = lang;
+
+            // 3. Update Text Content inside all element nodes dynamically
+            const t = translations[lang];
+            
+            const translatableIds = [
+                'brandName', 'brandSub', 'navAbout', 'navGallery', 'navContact', 
+                'badge', 'heroTitle', 'heroDesc', 'heroBtn', 'secAboutTitle',
+                'card1Title', 'card1Desc', 'card2Title', 'card2Desc', 'card3Title', 'card3Desc',
+                'quoteText', 'quoteAuthor', 'secGalleryTitle', 'galSofa', 'galTimber', 'galCupboard',
+                'secContactTitle', 'addressLabel', 'addressText', 'hoursLabel', 'hoursText',
+                'phoneLabel', 'whatsappText', 'footerText'
+            ];
+            
+            translatableIds.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.textContent = t[id];
+                }
+            });
+        }
+    </script>
+</body>
+</html>
