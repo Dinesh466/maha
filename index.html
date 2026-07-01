@@ -61,6 +61,14 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        /* Custom slide animation for the Showcase Manager drawer */
+        .admin-drawer {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .admin-drawer.open {
+            transform: translateX(0);
+        }
     </style>
 </head>
 <body class="text-stone-800 antialiased overflow-x-hidden">
@@ -86,13 +94,98 @@
                 <a href="#contact" class="hover:text-amber-400 transition-colors" id="nav-contact">Contact Us</a>
             </nav>
             
-            <!-- Language Selector Toggle -->
-            <div class="flex items-center bg-stone-900 border border-stone-800 p-1 rounded-full shadow-inner">
-                <button id="btn-lang-en" class="text-xs px-3 py-1.5 rounded-full font-bold transition-all duration-300 bg-timber-600 text-white shadow-md">EN</button>
-                <button id="btn-lang-te" class="text-xs px-3 py-1.5 rounded-full font-bold transition-all duration-300 text-stone-400 hover:text-white">తెలుగు</button>
+            <!-- Language Selector Toggle & Admin Button -->
+            <div class="flex items-center gap-3">
+                <button id="btn-admin-toggle" class="bg-stone-900 border border-stone-800 hover:border-timber-500 text-stone-300 hover:text-white px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1">
+                    <i class="fa-solid fa-lock"></i> <span id="lbl-admin-btn">Owner Login</span>
+                </button>
+                <div class="flex items-center bg-stone-900 border border-stone-800 p-1 rounded-full shadow-inner">
+                    <button id="btn-lang-en" class="text-xs px-3 py-1.5 rounded-full font-bold transition-all duration-300 bg-timber-600 text-white shadow-md">EN</button>
+                    <button id="btn-lang-te" class="text-xs px-3 py-1.5 rounded-full font-bold transition-all duration-300 text-stone-400 hover:text-white">తెలుగు</button>
+                </div>
             </div>
         </div>
     </header>
+
+    <!-- Admin Showcase Drawer / Modal Tool -->
+    <div id="adminDrawerOverlay" class="fixed inset-0 bg-stone-950/60 backdrop-blur-sm z-50 pointer-events-none opacity-0 transition-opacity duration-300 flex justify-end">
+        <div id="adminDrawer" class="admin-drawer w-full max-w-md bg-white h-full shadow-2xl flex flex-col justify-between border-l border-timber-100">
+            <!-- Header -->
+            <div class="p-6 border-b border-stone-100 flex justify-between items-center bg-stone-950 text-white">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-screwdriver-wrench text-timber-400"></i>
+                    <h3 class="font-serif text-lg font-bold" id="lbl-drawer-title">Showcase Manager</h3>
+                </div>
+                <button id="btn-admin-close" class="text-stone-400 hover:text-white text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <!-- Body Forms -->
+            <div class="p-6 flex-1 overflow-y-auto space-y-8">
+                <!-- 1. Add Custom Category -->
+                <div>
+                    <h4 class="font-serif text-base font-bold text-stone-900 mb-3" id="lbl-drawer-sec1">Create Custom Product Category</h4>
+                    <form id="form-add-category" class="space-y-3">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Category Name (English)</label>
+                            <input type="text" id="newCatEn" required class="w-full px-4 py-2 rounded-lg border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-timber-500" placeholder="e.g., Dining Set">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Category Name (Telugu)</label>
+                            <input type="text" id="newCatTe" required class="w-full px-4 py-2 rounded-lg border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-timber-500" placeholder="ఉదా: డైనింగ్ సెట్లు">
+                        </div>
+                        <button type="submit" class="w-full bg-stone-900 hover:bg-stone-950 text-white text-xs font-bold py-2.5 rounded-lg transition-all">
+                            + Add New Category
+                        </button>
+                    </form>
+                </div>
+
+                <div class="border-t border-stone-100"></div>
+
+                <!-- 2. Add Showcase Product -->
+                <div>
+                    <h4 class="font-serif text-base font-bold text-stone-900 mb-3" id="lbl-drawer-sec2">Add New Product to Gallery</h4>
+                    <form id="form-add-product" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Product Category</label>
+                            <select id="prodCategory" required class="w-full px-4 py-2 rounded-lg border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-timber-500 bg-white">
+                                <!-- Categories populated dynamically -->
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Product Name (English)</label>
+                            <input type="text" id="prodNameEn" required class="w-full px-4 py-2 rounded-lg border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-timber-500" placeholder="e.g., Carved Teak Window Frame">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Product Name (Telugu)</label>
+                            <input type="text" id="prodNameTe" required class="w-full px-4 py-2 rounded-lg border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-timber-500" placeholder="ఉదా: కిటికీ చట్రం">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Product Description (English)</label>
+                            <input type="text" id="prodDescEn" required class="w-full px-4 py-2 rounded-lg border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-timber-500" placeholder="e.g., Heavy Burma teakwood construction.">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Product Description (Telugu)</label>
+                            <input type="text" id="prodDescTe" required class="w-full px-4 py-2 rounded-lg border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-timber-500" placeholder="ఉదా: గట్టి బర్మా టేకు కలప తయారీ.">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">Product Photo</label>
+                            <input type="file" id="prodFile" accept="image/*" class="w-full text-sm text-stone-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-timber-50 file:text-timber-700 hover:file:bg-timber-100">
+                            <div class="text-xs text-stone-400 my-1 text-center font-bold">OR</div>
+                            <input type="url" id="prodUrl" class="w-full px-4 py-2 rounded-lg border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-timber-500" placeholder="Paste custom web image URL instead">
+                        </div>
+                        <button type="submit" class="w-full bg-timber-600 hover:bg-timber-700 text-white text-xs font-bold py-3 rounded-lg transition-all shadow-md">
+                            🚀 Upload & Publish Product
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <!-- Footer -->
+            <div class="p-6 bg-stone-50 border-t border-stone-100 text-center text-xs text-stone-500">
+                Data is securely stored in your local session data storage.
+            </div>
+        </div>
+    </div>
 
     <!-- Hero Banner -->
     <section class="relative min-h-[85vh] flex items-center justify-center bg-cover bg-center py-20 px-4" style="background-image: linear-gradient(rgba(12, 10, 9, 0.75), rgba(12, 10, 9, 0.9)), url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1600&q=80');">
@@ -116,14 +209,18 @@
 
     <!-- Stats Section -->
     <section class="bg-timber-50 py-12 px-4 relative -mt-10 z-20 max-w-6xl mx-auto rounded-2xl shadow-xl border border-timber-200/50">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 divide-y md:divide-y-0 md:divide-x divide-timber-200">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 divide-y md:divide-y-0 md:divide-x divide-timber-200">
             <div class="text-center md:px-4 py-4 md:py-0">
                 <div class="text-4xl lg:text-5xl font-serif font-extrabold text-timber-800">25+</div>
                 <div class="text-xs font-bold uppercase tracking-wider text-stone-500 mt-2" id="stat-experience">Years of Wood Experience</div>
             </div>
-            <div class="text-center md:px-4 py-4 md:py-0">
+            <div class="text-center md:px-4 py-4 md:py-0 border-t-0">
                 <div class="text-4xl lg:text-5xl font-serif font-extrabold text-timber-800">1K+</div>
                 <div class="text-xs font-bold uppercase tracking-wider text-stone-500 mt-2" id="stat-projects">Success Projects Done</div>
+            </div>
+            <div class="text-center md:px-4 py-4 md:py-0">
+                <div class="text-4xl lg:text-5xl font-serif font-extrabold text-timber-800">500+</div>
+                <div class="text-xs font-bold uppercase tracking-wider text-stone-500 mt-2" id="stat-buildings">Buildings Completed</div>
             </div>
             <div class="text-center md:px-4 py-4 md:py-0">
                 <div class="text-4xl lg:text-5xl font-serif font-extrabold text-timber-800">1 Year</div>
@@ -184,83 +281,15 @@
                 <h2 class="font-serif text-3xl lg:text-4xl font-bold text-stone-900 mb-4" id="sec2-title">Premium Wood Gallery</h2>
                 <div class="w-16 h-1 bg-timber-600 mx-auto rounded-full mb-8"></div>
                 
-                <!-- Category Filter Buttons -->
-                <div class="flex flex-wrap justify-center gap-3">
-                    <button id="filter-all" class="filter-btn px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 bg-timber-800 text-white shadow-md">All</button>
-                    <button id="filter-timber" class="filter-btn px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 bg-stone-100 text-stone-600 hover:bg-stone-200">Timber Depot</button>
-                    <button id="filter-furniture" class="filter-btn px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 bg-stone-100 text-stone-600 hover:bg-stone-200">Furniture Mart</button>
+                <!-- Category Filter Buttons (Populated dynamically) -->
+                <div class="flex flex-wrap justify-center gap-3" id="filter-container">
+                    <!-- Filter buttons will render dynamically here -->
                 </div>
             </div>
 
             <!-- Showcase Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
-                
-                <!-- Teak Wood Logs (Timber) -->
-                <div class="portfolio-item timber group relative overflow-hidden rounded-2xl shadow-md h-[320px] transition-all duration-500 hover:-translate-y-1">
-                    <img src="https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=600&q=80" alt="Timber Log Depot" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                        <span class="text-[10px] font-bold uppercase tracking-wider bg-timber-600 text-white px-2.5 py-1 rounded mb-2 inline-block">RAW MATERIAL</span>
-                        <h4 class="font-serif text-lg font-bold text-white mb-1" id="gal-t1">Burma Teak Wood Logs</h4>
-                        <p class="text-xs text-stone-300" id="gal-d1">Perfect for custom luxury construction.</p>
-                    </div>
-                </div>
-
-                <!-- Custom Sofa (Furniture) -->
-                <div class="portfolio-item furniture group relative overflow-hidden rounded-2xl shadow-md h-[320px] transition-all duration-500 hover:-translate-y-1">
-                    <img src="https://images.unsplash.com/photo-1581428982868-e410dd047a90?auto=format&fit=crop&w=600&q=80" alt="Premium Sofa" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                        <span class="text-[10px] font-bold uppercase tracking-wider bg-amber-500 text-stone-950 px-2.5 py-1 rounded mb-2 inline-block">FURNITURE</span>
-                        <h4 class="font-serif text-lg font-bold text-white mb-1" id="gal-t2">Premium Living Room Sofa</h4>
-                        <p class="text-xs text-stone-300" id="gal-d2">Rosewood framing with top fabric upholstery.</p>
-                    </div>
-                </div>
-
-                <!-- Royal Bed Frame (Furniture) -->
-                <div class="portfolio-item furniture group relative overflow-hidden rounded-2xl shadow-md h-[320px] transition-all duration-500 hover:-translate-y-1">
-                    <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=600&q=80" alt="Royal Bed" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                        <span class="text-[10px] font-bold uppercase tracking-wider bg-amber-500 text-stone-950 px-2.5 py-1 rounded mb-2 inline-block">FURNITURE</span>
-                        <h4 class="font-serif text-lg font-bold text-white mb-1" id="gal-t3">Emperor King Bed Frame</h4>
-                        <p class="text-xs text-stone-300" id="gal-d3">Sturdy teakwood bed with intricate carvings.</p>
-                    </div>
-                </div>
-
-                <!-- Hardwood Plank Pile (Timber) -->
-                <div class="portfolio-item timber group relative overflow-hidden rounded-2xl shadow-md h-[320px] transition-all duration-500 hover:-translate-y-1">
-                    <img src="https://images.unsplash.com/photo-1542125387-c71274d94f0a?auto=format&fit=crop&w=600&q=80" alt="Hardwood Logs" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                        <span class="text-[10px] font-bold uppercase tracking-wider bg-timber-600 text-white px-2.5 py-1 rounded mb-2 inline-block">RAW MATERIAL</span>
-                        <h4 class="font-serif text-lg font-bold text-white mb-1" id="gal-t4">Premium Teak Wood Planks</h4>
-                        <p class="text-xs text-stone-300" id="gal-d4">Termite-treated, seasoned construction cuts.</p>
-                    </div>
-                </div>
-
-                <!-- Custom Modular Kitchen Cabinet (Furniture) -->
-                <div class="portfolio-item furniture group relative overflow-hidden rounded-2xl shadow-md h-[320px] transition-all duration-500 hover:-translate-y-1">
-                    <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80" alt="Modular Cabinet" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                        <span class="text-[10px] font-bold uppercase tracking-wider bg-amber-500 text-stone-950 px-2.5 py-1 rounded mb-2 inline-block">FURNITURE</span>
-                        <h4 class="font-serif text-lg font-bold text-white mb-1" id="gal-t5">Contemporary Kitchen Cupboards</h4>
-                        <p class="text-xs text-stone-300" id="gal-d5">Moisture resistant designs with smooth sliders.</p>
-                    </div>
-                </div>
-
-                <!-- Luxury Dinning Table (Furniture) -->
-                <div class="portfolio-item furniture group relative overflow-hidden rounded-2xl shadow-md h-[320px] transition-all duration-500 hover:-translate-y-1">
-                    <img src="https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=600&q=80" alt="Dinning Table" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                        <span class="text-[10px] font-bold uppercase tracking-wider bg-amber-500 text-stone-950 px-2.5 py-1 rounded mb-2 inline-block">FURNITURE</span>
-                        <h4 class="font-serif text-lg font-bold text-white mb-1" id="gal-t6">Mahogany Dining Set</h4>
-                        <p class="text-xs text-stone-300" id="gal-d6">Robust 6-seater solid wood frame.</p>
-                    </div>
-                </div>
-
+                <!-- Portfolio items will render dynamically here based on selected filters -->
             </div>
         </div>
     </section>
@@ -412,6 +441,77 @@
 
     <!-- Application Logic -->
     <script>
+        // Default category configuration mapping
+        let categories = JSON.parse(localStorage.getItem('depo_categories')) || [
+            { id: 'all', en: 'All', te: 'అన్నీ' },
+            { id: 'windows', en: 'Windows', te: 'కిటికీలు' },
+            { id: 'doorways', en: 'Doorways', te: 'ద్వార బంధాలు' },
+            { id: 'window-doors', en: 'Window Doors', te: 'కిటికీ తలుపులు' },
+            { id: 'doorway-doors', en: 'Doorway Doors', te: 'తలుపులు' },
+            { id: 'doorway-mess-window', en: 'Doorway Mess Window', te: 'మెష్ తలుపులు & కిటికీలు' },
+            { id: 'beds', en: 'Beds', te: 'మంచాలు' }
+        ];
+
+        // Default list of high quality showcase items mapped directly to specifications
+        let defaultProducts = [
+            {
+                id: 'p1',
+                category: 'windows',
+                img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80',
+                enName: 'Teak Wooden Windows',
+                teName: 'టేకు కిటికీ చట్రాలు',
+                enDesc: 'Expertly carved premium Teak windows for natural elegance.',
+                teDesc: 'సహజమైన అందం కోసం నైపుణ్యంగా చెక్కబడిన టేకు కిటికీలు.'
+            },
+            {
+                id: 'p2',
+                category: 'doorways',
+                img: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=600&q=80',
+                enName: 'Burma Teak Doorway Frame',
+                teName: 'బర్మా టేకు ద్వారబంధం',
+                enDesc: 'Solid frames offering extreme durability and resistance.',
+                teDesc: 'గట్టి బర్మా టేకు కలపతో నిర్మితమైన ద్వారబంధాలు.'
+            },
+            {
+                id: 'p3',
+                category: 'window-doors',
+                img: 'https://images.unsplash.com/photo-1542125387-c71274d94f0a?auto=format&fit=crop&w=600&q=80',
+                enName: 'Seasoned Window Doors',
+                teName: 'కిటికీ తలుపులు',
+                enDesc: 'Termite-treated, polished window shutter doors.',
+                teDesc: 'చదలు పట్టని, లగ్జరీ పాలిష్ కిటికీ రెక్కలు.'
+            },
+            {
+                id: 'p4',
+                category: 'doorway-doors',
+                img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80',
+                enName: 'Main Doorway Door panel',
+                teName: 'ప్రధాన తలుపు',
+                enDesc: 'Royal carving doorway panels built from solid timber.',
+                teDesc: 'హస్తకళతో కూడిన రాచరిక టేకు ప్రధాన తలుపులు.'
+            },
+            {
+                id: 'p5',
+                category: 'doorway-mess-window',
+                img: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80',
+                enName: 'Doorway Mesh Windows',
+                teName: 'మెష్ తలుపులు & కిటికీలు',
+                enDesc: 'Custom wire netting frames protecting against insects.',
+                teDesc: 'దోమలు రాకుండా నిర్మించబడే మెష్ ఫ్రేములు.'
+            },
+            {
+                id: 'p6',
+                category: 'beds',
+                img: 'https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=600&q=80',
+                enName: 'Solid Wood Bed Frame',
+                teName: 'టేకు మంచాలు',
+                enDesc: 'King/Queen heavy duty teak beds with custom carvings.',
+                teDesc: 'అందమైన నగిషీలతో కూడిన టేకు డబుల్ కాట్ మంచం.'
+            }
+        ];
+
+        let products = JSON.parse(localStorage.getItem('depo_products')) || defaultProducts;
+
         // Dual Language Translations Engine Mapping
         const translations = {
             en: {
@@ -426,6 +526,7 @@
                 heroBtnExplore: "Explore Showcase",
                 statExperience: "Years of Wood Experience",
                 statProjects: "Success Projects Done",
+                statBuildings: "Buildings Completed",
                 statWarranty: "Craftsmanship Warranty",
                 sec1Title: "Our Premium Offerings",
                 card1Title: "Timber Depot",
@@ -436,18 +537,6 @@
                 reviewText: '"Sri Mahalakshmi Furniture provided exceptional work for my house. Excellent teak wood finish and very honest response."',
                 reviewAuthor: "— Venkat Prasad, Verified Customer Review",
                 sec2Title: "Premium Wood Gallery",
-                galT1: "Burma Teak Wood Logs",
-                galD1: "Perfect for custom luxury construction.",
-                galT2: "Premium Living Room Sofa",
-                galD2: "Rosewood framing with top fabric upholstery.",
-                galT3: "Emperor King Bed Frame",
-                galD3: "Sturdy teakwood bed with intricate carvings.",
-                galT4: "Premium Teak Wood Planks",
-                galD4: "Termite-treated, seasoned construction cuts.",
-                galT5: "Contemporary Kitchen Cupboards",
-                galD5: "Moisture resistant designs with smooth sliders.",
-                galT6: "Mahogany Dining Set",
-                galD6: "Robust 6-seater solid wood frame.",
                 sec3Title: "Visit Our Depot & Showroom",
                 contactHeading: "Sri Mahalakshmi Timber Depo",
                 lblAddr: "Office & Depot Location",
@@ -466,7 +555,12 @@
                 lblModalEmail: "Email Address",
                 btnModalSubmit: "Submit & Request Callback",
                 modalSuccessTitle: "Thank You!",
-                modalSuccessDesc: "Your details have been successfully submitted. Our representative will contact you shortly."
+                modalSuccessDesc: "Your details have been successfully submitted. Our representative will contact you shortly.",
+                // Admin drawer translations
+                lblAdminBtn: "Owner Login",
+                lblDrawerTitle: "Showcase Manager",
+                lblDrawerSec1: "Create Custom Product Category",
+                lblDrawerSec2: "Add New Product to Gallery"
             },
             te: {
                 badge: "★ 5.0 గూగుల్ రేటింగ్",
@@ -480,6 +574,7 @@
                 heroBtnExplore: "సేకరణను చూడండి",
                 statExperience: "సంవత్సరాల కలప వ్యాపార అనుభవం",
                 statProjects: "విజయవంతమైన ప్రాజెక్ట్స్",
+                statBuildings: "పూర్తయిన భవనాలు",
                 statWarranty: "హస్తకళ గ్యారెంటీ",
                 sec1Title: "మా ప్రత్యేకతలు",
                 card1Title: "టింబర్ డిపో",
@@ -490,18 +585,6 @@
                 reviewText: '"మా ఇంటికి శ్రీ మహాలక్ష్మి ఫర్నిచర్ చాలా అద్భుతమైన వర్క్ చేసి ఇచ్చారు. టేకు ఫినిషింగ్ చాలా బాగుంది, సకాలంలో పూర్తి చేశారు."',
                 reviewAuthor: "— వెంకట్ ప్రసాద్, వెరిఫైడ్ కస్టమర్ రివ్యూ",
                 sec2Title: "ప్రీమియం కలప గ్యాలరీ",
-                galT1: "బర్మా టేకు కలప మొద్దులు",
-                galD1: "భవన నిర్మాణానికి మరియు ఇంటీరియర్స్ కు అత్యుత్తమం.",
-                galT2: "ప్రీమియం సోఫా సెట్",
-                galD2: "రోజ్‌వుడ్ ఫ్రేమింగ్‌తో నిర్మితమైన ఆధునిక సోఫా.",
-                galT3: "రాచరిక టేకు మంచం",
-                galD3: "అందమైన నగిషీలతో కూడిన టేకు మంచం.",
-                galT4: "ప్రీమియం టేకు కలప బల్లలు",
-                galD4: "చదలు పట్టని, సీజన్డ్ కన్‌స్ట్రక్షన్ కట్స్.",
-                galT5: "ఆధునిక వంటగది క్యాబినెట్లు",
-                galD5: "తేమను తట్టుకునే మోడ్యులర్ కిచెన్ కప్‌బోర్డ్స్.",
-                galT6: "మహోగని డైనింగ్ సెట్",
-                galD6: "మన్నికైన 6 సీటర్ సాలిడ్ కలప డైనింగ్ టేబుల్.",
                 sec3Title: "మా డిపో మరియు షోరూమ్ సందర్శించండి",
                 contactHeading: "శ్రీ మహాలక్ష్మి టింబర్ డిపో",
                 lblAddr: "ఆఫీస్ & డిపో అడ్రస్",
@@ -520,14 +603,88 @@
                 lblModalEmail: "ఇమెయిల్ అడ్రస్",
                 btnModalSubmit: "సమర్పించి కాల్ అడగండి",
                 modalSuccessTitle: "ధన్యవాదాలు!",
-                modalSuccessDesc: "మీ వివరాలు విజయవంతంగా అందాయి. మా ప్రతినిధి అతి త్వరలోనే మిమ్మల్ని సంప్రదిస్తారు."
+                modalSuccessDesc: "మీ వివరాలు విజయవంతంగా అందాయి. మా ప్రతినిధి అతి త్వరలోనే మిమ్మల్ని సంప్రదిస్తారు.",
+                // Admin drawer translations
+                lblAdminBtn: "యాజమాన్యం లాగిన్",
+                lblDrawerTitle: "గ్యాలరీ మేనేజర్",
+                lblDrawerSec1: "కస్టమ్ ప్రోడక్ట్ వర్గాన్ని జోడించండి",
+                lblDrawerSec2: "కొత్త వస్తువును గ్యాలరీకి అప్‌లోడ్ చేయండి"
             }
         };
 
         const btnLangEn = document.getElementById('btn-lang-en');
         const btnLangTe = document.getElementById('btn-lang-te');
+        let currentLang = 'en';
+
+        // Function to render portfolio filter buttons
+        function renderFilters() {
+            const filterContainer = document.getElementById('filter-container');
+            filterContainer.innerHTML = '';
+            
+            categories.forEach((cat, idx) => {
+                const btn = document.createElement('button');
+                btn.id = `filter-${cat.id}`;
+                btn.className = `filter-btn px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 ${
+                    idx === 0 ? 'bg-timber-800 text-white shadow-md' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+                }`;
+                btn.innerText = currentLang === 'en' ? cat.en : cat.te;
+                
+                // Programmatic filtering event mapping
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-btn').forEach(b => {
+                        b.className = "filter-btn px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 bg-stone-100 text-stone-600 hover:bg-stone-200";
+                    });
+                    btn.className = "filter-btn px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 bg-timber-800 text-white shadow-md";
+                    renderProducts(cat.id);
+                });
+
+                filterContainer.appendChild(btn);
+            });
+        }
+
+        // Function to render products in the catalog
+        function renderProducts(filterCategory = 'all') {
+            const grid = document.getElementById('portfolio-grid');
+            grid.innerHTML = '';
+
+            const filtered = filterCategory === 'all' 
+                ? products 
+                : products.filter(p => p.category === filterCategory);
+
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = `portfolio-item group relative overflow-hidden rounded-2xl shadow-md h-[320px] transition-all duration-500 hover:-translate-y-1`;
+                
+                const catObj = categories.find(c => c.id === p.category);
+                const tagLabel = catObj ? (currentLang === 'en' ? catObj.en : catObj.te) : 'PRODUCT';
+
+                card.innerHTML = `
+                    <img src="${p.img}" alt="${p.enName}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/40 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-amber-500 text-stone-950 px-2.5 py-1 rounded mb-2 inline-block">${tagLabel}</span>
+                        <h4 class="font-serif text-lg font-bold text-white mb-1">${currentLang === 'en' ? p.enName : p.teName}</h4>
+                        <p class="text-xs text-stone-300">${currentLang === 'en' ? p.enDesc : p.teDesc}</p>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Admin categories select options populations
+        function updateCategoryDropdown() {
+            const select = document.getElementById('prodCategory');
+            select.innerHTML = '';
+            categories.filter(c => c.id !== 'all').forEach(cat => {
+                const opt = document.createElement('option');
+                opt.value = cat.id;
+                opt.innerText = cat.en;
+                select.appendChild(opt);
+            });
+        }
 
         function setLanguage(lang) {
+            currentLang = lang;
             localStorage.setItem('selectedLang', lang);
             
             // Switch button highlighting styles
@@ -553,6 +710,7 @@
 
             document.getElementById('stat-experience').innerText = translations[lang].statExperience;
             document.getElementById('stat-projects').innerText = translations[lang].statProjects;
+            document.getElementById('stat-buildings').innerText = translations[lang].statBuildings;
             document.getElementById('stat-warranty').innerText = translations[lang].statWarranty;
 
             document.getElementById('sec1-title').innerText = translations[lang].sec1Title;
@@ -566,19 +724,6 @@
             document.getElementById('review-author').innerText = translations[lang].reviewAuthor;
 
             document.getElementById('sec2-title').innerText = translations[lang].sec2Title;
-            document.getElementById('gal-t1').innerText = translations[lang].galT1;
-            document.getElementById('gal-d1').innerText = translations[lang].galD1;
-            document.getElementById('gal-t2').innerText = translations[lang].galT2;
-            document.getElementById('gal-d2').innerText = translations[lang].galD2;
-            document.getElementById('gal-t3').innerText = translations[lang].galT3;
-            document.getElementById('gal-d3').innerText = translations[lang].galD3;
-            document.getElementById('gal-t4').innerText = translations[lang].galT4;
-            document.getElementById('gal-d4').innerText = translations[lang].galD4;
-            document.getElementById('gal-t5').innerText = translations[lang].galT5;
-            document.getElementById('gal-d5').innerText = translations[lang].galD5;
-            document.getElementById('gal-t6').innerText = translations[lang].galT6;
-            document.getElementById('gal-d6').innerText = translations[lang].galD6;
-
             document.getElementById('sec3-title').innerText = translations[lang].sec3Title;
             document.getElementById('contact-heading').innerText = translations[lang].contactHeading;
             document.getElementById('lbl-addr').innerText = translations[lang].lblAddr;
@@ -594,50 +739,122 @@
             // Modal specific
             document.getElementById('modalTitle').innerText = translations[lang].modalTitle;
             document.getElementById('modalSub').innerText = translations[lang].modalSub;
-            document.getElementById('lbl-name').innerText = translations[lang].lblModalName;
-            document.getElementById('lbl-phone').innerText = translations[lang].lblModalPhone;
-            document.getElementById('lbl-email').innerText = translations[lang].lblModalEmail;
+            document.getElementById('lblModalName').innerText = translations[lang].lblModalName;
+            document.getElementById('lblModalPhone').innerText = translations[lang].lblModalPhone;
+            document.getElementById('lblModalEmail').innerText = translations[lang].lblModalEmail;
             document.getElementById('btnModalSubmit').innerText = translations[lang].btnModalSubmit;
             document.getElementById('modalSuccessTitle').innerText = translations[lang].modalSuccessTitle;
             document.getElementById('modalSuccessDesc').innerText = translations[lang].modalSuccessDesc;
+
+            // Admin panel translations
+            document.getElementById('lbl-admin-btn').innerText = translations[lang].lblAdminBtn;
+            document.getElementById('lbl-drawer-title').innerText = translations[lang].lblDrawerTitle;
+            document.getElementById('lbl-drawer-sec1').innerText = translations[lang].lblDrawerSec1;
+            document.getElementById('lbl-drawer-sec2').innerText = translations[lang].lblDrawerSec2;
+
+            // Rerender layout blocks with fresh localizations
+            renderFilters();
+            renderProducts();
         }
 
-        // Programmatic Event Listeners to bypass strict Vercel/GitHub Pages sandbox executions
+        // Programmatic Event Listeners for Languages
         btnLangEn.addEventListener('click', () => setLanguage('en'));
         btnLangTe.addEventListener('click', () => setLanguage('te'));
+
+        // Drawer Controls
+        const btnAdminToggle = document.getElementById('btn-admin-toggle');
+        const btnAdminClose = document.getElementById('btn-admin-close');
+        const adminDrawerOverlay = document.getElementById('adminDrawerOverlay');
+        const adminDrawer = document.getElementById('adminDrawer');
+
+        function toggleAdminDrawer(show) {
+            if(show) {
+                adminDrawerOverlay.classList.remove('pointer-events-none', 'opacity-0');
+                adminDrawer.classList.add('open');
+            } else {
+                adminDrawerOverlay.classList.add('pointer-events-none', 'opacity-0');
+                adminDrawer.classList.remove('open');
+            }
+        }
+
+        btnAdminToggle.addEventListener('click', () => toggleAdminDrawer(true));
+        btnAdminClose.addEventListener('click', () => toggleAdminDrawer(false));
+        adminDrawerOverlay.addEventListener('click', (e) => {
+            if(e.target === adminDrawerOverlay) toggleAdminDrawer(false);
+        });
+
+        // Form Submit: Add Custom Category
+        const formAddCategory = document.getElementById('form-add-category');
+        formAddCategory.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nameEn = document.getElementById('newCatEn').value.trim();
+            const nameTe = document.getElementById('newCatTe').value.trim();
+            const id = nameEn.toLowerCase().replace(/[^a-z0-9]/g, '-');
+
+            if(categories.some(c => c.id === id)) {
+                alert('This category already exists.');
+                return;
+            }
+
+            categories.push({ id, en: nameEn, te: nameTe });
+            localStorage.setItem('depo_categories', JSON.stringify(categories));
+            
+            formAddCategory.reset();
+            updateCategoryDropdown();
+            renderFilters();
+            renderProducts();
+            toggleAdminDrawer(false);
+        });
+
+        // Form Submit: Add New Product Showcase Card
+        const formAddProduct = document.getElementById('form-add-product');
+        formAddProduct.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const category = document.getElementById('prodCategory').value;
+            const enName = document.getElementById('prodNameEn').value.trim();
+            const teName = document.getElementById('prodNameTe').value.trim();
+            const enDesc = document.getElementById('prodDescEn').value.trim();
+            const teDesc = document.getElementById('prodDescTe').value.trim();
+            const urlInput = document.getElementById('prodUrl').value.trim();
+            const fileInput = document.getElementById('prodFile').files[0];
+
+            let imgUrl = urlInput || 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=80';
+
+            const addAndSave = (url) => {
+                const newProduct = {
+                    id: 'p-' + Date.now(),
+                    category,
+                    img: url,
+                    enName,
+                    teName,
+                    enDesc,
+                    teDesc
+                };
+                products.push(newProduct);
+                localStorage.setItem('depo_products', JSON.stringify(products));
+                
+                formAddProduct.reset();
+                renderProducts();
+                toggleAdminDrawer(false);
+            };
+
+            // If a file upload is used, read it as an ObjectURL/base64 so it previews locally instantly
+            if(fileInput) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    addAndSave(event.target.result);
+                };
+                reader.readAsDataURL(fileInput);
+            } else {
+                addAndSave(imgUrl);
+            }
+        });
 
         // On Load initialization
         window.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('selectedLang') || 'en';
             setLanguage(savedLang);
-        });
-
-        // Interactive Portfolio Filter Code
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const portfolioItems = document.querySelectorAll('.portfolio-item');
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Reset active styles on buttons
-                filterBtns.forEach(b => {
-                    b.className = "filter-btn px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 bg-stone-100 text-stone-600 hover:bg-stone-200";
-                });
-                
-                // Set active style on current clicked button
-                btn.className = "filter-btn px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 bg-timber-800 text-white shadow-md";
-
-                const category = btn.id.split('-')[1];
-
-                portfolioItems.forEach(item => {
-                    if (category === 'all') {
-                        item.classList.remove('hidden');
-                    } else if (item.classList.contains(category)) {
-                        item.classList.remove('hidden');
-                    } else {
-                        item.classList.add('hidden');
-                    }
-                });
-            });
+            updateCategoryDropdown();
         });
 
         // 30-Second Modal Logic
