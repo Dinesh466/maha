@@ -1,38 +1,43 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sri Mahalakshmi Timber Depo & Furniture Mart</title>
     
-    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS CDN for modern and rapid utility styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts for Editorial Elegance (Marcellus + Plus Jakarta Sans) -->
+    <!-- Google Fonts - Marcellus (Serif) & Plus Jakarta Sans (Sans-serif) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- FontAwesome Icons for modern interactive UI components -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         timber: {
-                            50: '#faf6f0',
-                            100: '#f4eae0',
-                            200: '#e5d1be',
-                            300: '#d0b093',
-                            400: '#bc8f6b',
-                            500: '#a36d47',
-                            600: '#8c5535',
-                            700: '#6e402a',
-                            800: '#4e2d1f',
-                            900: '#3a2118',
-                            950: '#20100a',
+                            50: '#FAF6F0',
+                            100: '#F4ECE1',
+                            200: '#E6D5C1',
+                            300: '#D2B799',
+                            400: '#BD9670',
+                            500: '#AA7B4F',
+                            600: '#9C6C42',
+                            700: '#825533',
+                            800: '#6A452B',
+                            900: '#563824',
+                            950: '#2E1D12',
                         },
-                        accent: '#D4AF37', // Gold highlights
-                        dark: '#16120F',   // Luxury charcoal
+                        stone: {
+                            900: '#1C1917',
+                            950: '#0C0A09',
+                        }
                     },
                     fontFamily: {
                         serif: ['Marcellus', 'serif'],
@@ -42,268 +47,318 @@
             }
         }
     </script>
-
+    
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #FAF6F0;
         }
-        h1, h2, h3 {
-            font-family: 'Marcellus', serif;
-        }
-        /* Premium custom micro-interactions */
-        .transition-all-custom {
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .wood-pattern-overlay {
-            background-image: radial-gradient(circle at 20% 30%, rgba(163, 109, 71, 0.15) 1px, transparent 1px),
-                              radial-gradient(circle at 75% 60%, rgba(78, 45, 31, 0.1) 1px, transparent 1px);
-            background-size: 40px 40px;
+        .luxury-text-gradient {
+            background: linear-gradient(135deg, #E6D5C1 0%, #AA7B4F 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
-<body class="text-stone-800 selection:bg-timber-300 selection:text-timber-950 wood-pattern-overlay">
+<body class="text-stone-800 antialiased overflow-x-hidden">
 
-    <header class="sticky top-0 z-50 bg-dark text-white/90 border-b border-white/10 backdrop-blur-md bg-opacity-95 px-4 md:px-8 py-4 transition-all duration-300">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-50 bg-stone-950/95 backdrop-blur-md border-b border-stone-800/50 shadow-lg px-4 lg:px-8 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <div class="bg-timber-600 p-2.5 rounded-lg text-white shadow-md shadow-timber-950/20">
+                <i class="fa-solid fa-tree text-xl"></i>
+            </div>
+            <div>
+                <span class="brand-name font-serif text-lg md:text-xl lg:text-2xl font-bold tracking-wider text-white">SRI MAHALAKSHMI</span>
+                <div class="flex items-center gap-2 mt-0.5">
+                    <span class="text-xs bg-amber-500 text-stone-950 px-2 py-0.5 rounded font-bold uppercase tracking-wider" id="txt-badge">★ 5.0 Google Rated</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flex items-center gap-4 lg:gap-8">
+            <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-stone-300">
+                <a href="#about" class="hover:text-amber-400 transition-colors" id="nav-about">Our Legacy</a>
+                <a href="#gallery" class="hover:text-amber-400 transition-colors" id="nav-gallery">Products Showcase</a>
+                <a href="#contact" class="hover:text-amber-400 transition-colors" id="nav-contact">Contact Us</a>
+            </nav>
             
-            <!-- Brand & Trust badge -->
-            <div class="flex flex-col items-center md:items-start text-center md:text-left">
-                <div class="flex items-center gap-3">
-                    <span id="brandName" class="text-2xl font-serif font-bold text-amber-100 tracking-wider">SRI MAHALAKSHMI</span>
-                    <span id="badge" class="bg-amber-400 text-stone-950 text-[11px] font-extrabold px-2 py-0.5 rounded shadow-sm uppercase tracking-wider">★ 5.0 Google Rated</span>
-                </div>
-                <span id="brandSub" class="text-xs text-timber-300 font-semibold uppercase tracking-widest mt-1">TIMBER DEPO & FURNITURE MART</span>
+            <!-- Language Selector Toggle -->
+            <div class="flex items-center bg-stone-900 border border-stone-800 p-1 rounded-full shadow-inner">
+                <button id="btn-lang-en" class="text-xs px-3 py-1.5 rounded-full font-bold transition-all duration-300 bg-timber-600 text-white shadow-md">EN</button>
+                <button id="btn-lang-te" class="text-xs px-3 py-1.5 rounded-full font-bold transition-all duration-300 text-stone-400 hover:text-white">తెలుగు</button>
             </div>
-
-            <!-- Nav Links & Language Switcher -->
-            <div class="flex wrap items-center justify-center gap-6 lg:gap-8">
-                <nav class="flex gap-6 text-sm font-semibold text-stone-300">
-                    <a href="#about" id="navAbout" class="hover:text-accent transition-colors">Our Services</a>
-                    <a href="#gallery" id="navGallery" class="hover:text-accent transition-colors">Showcase</a>
-                    <a href="#contact" id="navContact" class="hover:text-accent transition-colors">Contact Us</a>
-                </nav>
-
-                <!-- Premium Language Toggles -->
-                <div class="flex bg-stone-900 border border-white/10 rounded-full p-1 shadow-inner">
-                    <button id="btn-en" data-lang="en" class="lang-btn px-4 py-1.5 text-xs font-bold rounded-full transition-all-custom bg-timber-700 text-white">
-                        English
-                    </button>
-                    <button id="btn-te" data-lang="te" class="lang-btn px-4 py-1.5 text-xs font-bold rounded-full transition-all-custom text-neutral-400">
-                        తెలుగు
-                    </button>
-                </div>
-            </div>
-
         </div>
     </header>
 
-    <section class="relative bg-stone-950 text-white overflow-hidden py-24 lg:py-36 px-4 md:px-8">
-        <!-- Background Overlay Image -->
-        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center opacity-20"></div>
-        <!-- Warm lighting radial gradient to resemble wood polishing finishes -->
-        <div class="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent"></div>
-
-        <div class="relative max-w-5xl mx-auto text-center">
-            <h1 id="heroTitle" class="text-4xl md:text-6xl font-serif text-amber-50/95 leading-tight mb-6">
-                Premium Timber. Master Craftsmanship.
+    <!-- Hero Banner -->
+    <section class="relative min-h-[85vh] flex items-center justify-center bg-cover bg-center py-20 px-4" style="background-image: linear-gradient(rgba(12, 10, 9, 0.75), rgba(12, 10, 9, 0.9)), url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1600&q=80');">
+        <div class="max-w-4xl mx-auto text-center z-10">
+            <span class="text-xs lg:text-sm font-bold uppercase tracking-widest text-amber-500 mb-4 inline-block" id="hero-tag">ESTABLISHED IN 2001</span>
+            <h1 class="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-wide" id="hero-title">
+                Premium Timber. <br><span class="luxury-text-gradient">Master Craftsmanship.</span>
             </h1>
-            <p id="heroDesc" class="text-lg md:text-xl text-stone-300 font-light max-w-3xl mx-auto mb-10 leading-relaxed">
-                Your ultimate destination for wholesale raw timber, custom-designed premium furniture, and architectural woodwork since 2001.
+            <p class="text-base md:text-lg lg:text-xl text-stone-300 mb-10 max-w-2xl mx-auto leading-relaxed" id="hero-desc">
+                Your one-stop destination for wholesale raw wood materials and custom-built, luxury home furniture designs in Amalapuram.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#contact" id="heroBtn" class="bg-timber-500 hover:bg-timber-600 text-white font-bold py-3.5 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all-custom transform hover:-translate-y-0.5 text-center">
-                    Get Free Quote
+                <a href="https://wa.me/919293343999?text=Hello%20Sri%20Mahalakshmi%20Timber%20Depo,%20I'm%20interested%20in%20your%20products." target="_blank" class="bg-timber-600 hover:bg-timber-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-timber-600/30 transition-all duration-300 hover:-translate-y-0.5 text-center flex items-center justify-center gap-2" id="hero-btn-quote">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> <span id="hero-btn-quote-text">Get Custom Pricing</span>
                 </a>
+                <a href="#gallery" class="border border-stone-600 hover:border-white text-white font-bold px-8 py-4 rounded-xl transition-all duration-300 text-center hover:bg-white/5" id="hero-btn-explore">Explore Showcase</a>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-timber-50 to-transparent"></div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="bg-timber-50 py-12 px-4 relative -mt-10 z-20 max-w-6xl mx-auto rounded-2xl shadow-xl border border-timber-200/50">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 divide-y md:divide-y-0 md:divide-x divide-timber-200">
+            <div class="text-center md:px-4 py-4 md:py-0">
+                <div class="text-4xl lg:text-5xl font-serif font-extrabold text-timber-800">25+</div>
+                <div class="text-xs font-bold uppercase tracking-wider text-stone-500 mt-2" id="stat-experience">Years of Wood Experience</div>
+            </div>
+            <div class="text-center md:px-4 py-4 md:py-0">
+                <div class="text-4xl lg:text-5xl font-serif font-extrabold text-timber-800">1K+</div>
+                <div class="text-xs font-bold uppercase tracking-wider text-stone-500 mt-2" id="stat-projects">Success Projects Done</div>
+            </div>
+            <div class="text-center md:px-4 py-4 md:py-0">
+                <div class="text-4xl lg:text-5xl font-serif font-extrabold text-timber-800">1 Year</div>
+                <div class="text-xs font-bold uppercase tracking-wider text-stone-500 mt-2" id="stat-warranty">Craftsmanship Warranty</div>
             </div>
         </div>
     </section>
 
-    <section class="bg-amber-100/50 py-10 border-y border-timber-200">
-        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center px-4">
-            <div>
-                <p class="text-3xl md:text-4xl font-serif font-bold text-timber-800">25+</p>
-                <p id="statYears" class="text-xs uppercase font-bold tracking-widest text-timber-600 mt-1">Years Experience</p>
-            </div>
-            <div>
-                <p class="text-3xl md:text-4xl font-serif font-bold text-timber-800">1k+</p>
-                <p id="statCustomers" class="text-xs uppercase font-bold tracking-widest text-timber-600 mt-1">Projects Completed</p>
-            </div>
-            <div>
-                <p class="text-3xl md:text-4xl font-serif font-bold text-timber-800">1 Year</p>
-                <p id="statWood" class="text-xs uppercase font-bold tracking-widest text-timber-600 mt-1">Product Warranty</p>
-            </div>
-            <div>
-                <p class="text-3xl md:text-4xl font-serif font-bold text-timber-800">5.0 ★</p>
-                <p id="statRating" class="text-xs uppercase font-bold tracking-widest text-timber-600 mt-1">Google Reviews</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="py-20 px-4 md:px-8 max-w-7xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 id="secAboutTitle" class="text-3xl md:text-4xl font-serif font-bold text-stone-900 tracking-wide">
-                Our Expertise
-            </h2>
-            <div class="wood-separator w-20 h-1 bg-timber-500 mx-auto mt-4 rounded-full"></div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Card 1: Timber Depot -->
-            <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border-t-4 border-timber-500 flex flex-col justify-between">
-                <div>
-                    <div class="text-4xl mb-4 text-timber-600">🪵</div>
-                    <h3 id="card1Title" class="text-2xl font-serif text-stone-900 mb-4 font-semibold">Timber Depot</h3>
-                    <p id="card1Desc" class="text-stone-600 text-sm leading-relaxed mb-6">
-                        Sourcing certified, premium grade wholesale timber. Seasoned Burma Teak, Indian Rosewood, Neem, and Mahogany ready for heavy-duty construction and high-end carving.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Card 2: Custom Furniture -->
-            <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border-t-4 border-amber-500 flex flex-col justify-between">
-                <div>
-                    <div class="text-4xl mb-4 text-amber-600">🛋️</div>
-                    <h3 id="card2Title" class="text-2xl font-serif text-stone-900 mb-4 font-semibold">Custom Furniture Mart</h3>
-                    <p id="card2Desc" class="text-stone-600 text-sm leading-relaxed mb-6">
-                        Impeccably handcrafted dining tables, custom luxury sofa sets, solid wooden royal beds, and bespoke wardrobes tailored perfectly to your room's dimensions.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Card 3: Modular Cupboards -->
-            <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border-t-4 border-stone-800 flex flex-col justify-between">
-                <div>
-                    <div class="text-4xl mb-4 text-stone-800">📐</div>
-                    <h3 id="card3Title" class="text-2xl font-serif text-stone-900 mb-4 font-semibold">Bespoke Woodwork</h3>
-                    <p id="card3Desc" class="text-stone-600 text-sm leading-relaxed mb-6">
-                        Complete end-to-end design, manufacturing, and installations for modern modular kitchen cupboards, TV consoles, partition panels, and designer doors.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="bg-dark text-white py-16 px-6 md:px-12 my-12 text-center max-w-6xl mx-auto rounded-3xl shadow-xl relative overflow-hidden">
-        <div class="absolute inset-0 bg-timber-900 opacity-10"></div>
-        <div class="relative z-10 max-w-4xl mx-auto">
-            <div class="text-amber-400 text-3xl mb-4 tracking-wider">★★★★★</div>
-            <p id="quoteText" class="text-xl md:text-2xl font-serif italic text-amber-50/90 leading-relaxed mb-6">
-                "The finest Teak wood in town and absolute masterpiece carving on our dining table. Outstanding 5-star finish!"
-            </p>
-            <p id="quoteAuthor" class="text-amber-400 font-semibold text-sm tracking-widest uppercase">
-                — Satish Kumar, Verified Customer
-            </p>
-        </div>
-    </section>
-
-    <section id="gallery" class="py-20 px-4 md:px-8 max-w-7xl mx-auto">
-        <div class="text-center mb-10">
-            <h2 id="secGalleryTitle" class="text-3xl md:text-4xl font-serif font-bold text-stone-900 tracking-wide">
-                Premium Craftsmanship Gallery
-            </h2>
-            <div class="wood-separator w-20 h-1 bg-timber-500 mx-auto mt-4 rounded-full"></div>
-        </div>
-
-        <!-- Dynamic Category Selector Filter -->
-        <div class="flex justify-center gap-4 mb-12">
-            <button id="filter-all" class="filter-btn px-6 py-2 rounded-full font-semibold text-sm transition-all bg-timber-800 text-white shadow-md">All</button>
-            <button id="filter-timber" class="filter-btn px-6 py-2 rounded-full font-semibold text-sm transition-all bg-white text-stone-700 hover:bg-stone-100 border border-stone-200">Raw Timber</button>
-            <button id="filter-furniture" class="filter-btn px-6 py-2 rounded-full font-semibold text-sm transition-all bg-white text-stone-700 hover:bg-stone-100 border border-stone-200">Fine Furniture</button>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Item 1 (Furniture) -->
-            <div class="gallery-item group relative overflow-hidden rounded-2xl shadow-md h-80 transition-all duration-300" data-category="furniture">
-                <img src="https://images.unsplash.com/photo-1581428982868-e410dd047a90?auto=format&fit=crop&w=600&q=80" alt="Luxury Sofa" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent flex items-end p-6">
-                    <h4 id="galSofa" class="text-white text-lg font-serif font-semibold tracking-wide">Luxury Living Room Sofas</h4>
-                </div>
-            </div>
-
-            <!-- Item 2 (Timber) -->
-            <div class="gallery-item group relative overflow-hidden rounded-2xl shadow-md h-80 transition-all duration-300" data-category="timber">
-                <img src="https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=600&q=80" alt="Teak logs" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent flex items-end p-6">
-                    <h4 id="galTimber" class="text-white text-lg font-serif font-semibold tracking-wide">Premium Teak & Hardwood Logs</h4>
-                </div>
-            </div>
-
-            <!-- Item 3 (Furniture) -->
-            <div class="gallery-item group relative overflow-hidden rounded-2xl shadow-md h-80 transition-all duration-300" data-category="furniture">
-                <img src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=600&q=80" alt="Cupboards" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent flex items-end p-6">
-                    <h4 id="galCupboard" class="text-white text-lg font-serif font-semibold tracking-wide">Modular Kitchen & Cupboards</h4>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="py-20 px-4 md:px-8 bg-timber-50/50">
+    <!-- What We Do Section -->
+    <section id="about" class="py-20 px-4 bg-timber-50">
         <div class="max-w-6xl mx-auto">
-            <h2 id="secContactTitle" class="text-3xl md:text-4xl font-serif font-bold text-stone-900 text-center mb-12">
-                Visit Our Showroom
-            </h2>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-stone-100">
-                <!-- Location details -->
-                <div class="space-y-6">
-                    <div>
-                        <h3 id="contactBrand" class="text-2xl font-serif font-bold text-stone-900 mb-2">Sri Mahalakshmi Timber Depo</h3>
-                        <div class="w-12 h-1 bg-amber-500 rounded"></div>
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-3xl lg:text-4xl font-bold text-stone-900 mb-4" id="sec1-title">Our Premium Offerings</h2>
+                <div class="w-16 h-1 bg-timber-600 mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Timber Depot -->
+                <div class="bg-white p-8 rounded-2xl shadow-md border-t-4 border-timber-600 hover:shadow-xl transition-shadow duration-300">
+                    <div class="w-12 h-12 bg-timber-100 text-timber-800 rounded-xl flex items-center justify-center mb-6 text-xl shadow-inner">
+                        <i class="fa-solid fa-tree"></i>
                     </div>
-
-                    <div class="space-y-4">
-                        <p class="text-stone-700">
-                            <strong id="addressLabel" class="block text-stone-900 text-xs uppercase tracking-widest font-semibold mb-1">Store Location:</strong>
-                            <span id="addressText">Peruru Rd, Amalapuram, Bodasakurru, Andhra Pradesh - 533218</span>
-                        </p>
-                        <p class="text-stone-700">
-                            <strong id="hoursLabel" class="block text-stone-900 text-xs uppercase tracking-widest font-semibold mb-1">Business Hours:</strong>
-                            <span id="hoursText">Open Daily: 9:00 AM - 7:00 PM</span>
-                        </p>
-                        <p class="text-stone-700">
-                            <strong id="phoneLabel" class="block text-stone-900 text-xs uppercase tracking-widest font-semibold mb-1">Phone Number:</strong>
-                            <span>+91 92933 43999</span>
-                        </p>
-                    </div>
+                    <h3 class="font-serif text-xl font-bold text-stone-900 mb-3" id="card1-title">Timber Depot</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed" id="card1-desc">
+                        Sourcing premium grade wholesale logs and cut timber including seasoned Teak, Rosewood, Neem, and Mahogany for all structural design work.
+                    </p>
                 </div>
 
-                <!-- Fully Rendered Premium Mock Visual Map showing Route from Landmarks -->
-                <div class="relative w-full h-80 rounded-2xl overflow-hidden bg-amber-50/80 border border-timber-200 shadow-inner flex flex-col items-center justify-center p-6 text-center">
-                    <div class="text-4xl mb-3">📍</div>
-                    <h4 id="mapTitle" class="font-serif font-bold text-stone-900 text-lg mb-2">Amalapuram Branch</h4>
-                    <p id="mapSubtitle" class="text-stone-600 text-sm max-w-sm mb-4">Directly located on Peruru Road, Amalapuram, for easy access, quick timber loading, and secure custom logistics.</p>
-                    <a href="https://maps.google.com/?q=Peruru+Rd,+Amalapuram,+Bodasakurru,+Andhra+Pradesh+533218" target="_blank" id="mapButton" class="bg-stone-900 hover:bg-stone-800 text-white font-semibold text-xs py-2 px-5 rounded-full transition-all">Open on Google Maps</a>
+                <!-- Custom Furniture -->
+                <div class="bg-white p-8 rounded-2xl shadow-md border-t-4 border-timber-600 hover:shadow-xl transition-shadow duration-300">
+                    <div class="w-12 h-12 bg-timber-100 text-timber-800 rounded-xl flex items-center justify-center mb-6 text-xl shadow-inner">
+                        <i class="fa-solid fa-couch"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-stone-900 mb-3" id="card2-title">Custom Furniture</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed" id="card2-desc">
+                        Beautifully handcrafted dining tables, heavy luxury sofas, robust bed frames, and study tables tailored perfectly to your dimensions.
+                    </p>
+                </div>
+
+                <!-- Interior Woodwork -->
+                <div class="bg-white p-8 rounded-2xl shadow-md border-t-4 border-timber-600 hover:shadow-xl transition-shadow duration-300">
+                    <div class="w-12 h-12 bg-timber-100 text-timber-800 rounded-xl flex items-center justify-center mb-6 text-xl shadow-inner">
+                        <i class="fa-solid fa-kitchen-set"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-stone-900 mb-3" id="card3-title">Interior Woodwork</h3>
+                    <p class="text-stone-600 text-sm leading-relaxed" id="card3-desc">
+                        Complete modular design implementation. Modern wardrobes, TV units, luxury modular kitchen cupboards, and exquisite ceilings.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- WhatsApp Floating Action Button (Points instantly to chat) -->
-    <a id="ws-btn" href="https://wa.me/919293343999?text=Hello,%20I'm%20interested%20in%20high-quality%20timber%20and%20premium%20furniture." target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold py-3.5 px-6 rounded-full shadow-2xl hover:shadow-green-500/20 flex items-center gap-2.5 transition-all-custom transform hover:scale-105">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.907h.004c4.368 0 7.926-3.558 7.93-7.93a7.897 7.897 0 0 0-2.327-5.594zM7.994 14.52a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.69-4.294c-.202-.101-1.194-.588-1.378-.654-.185-.067-.32-.1-.454.1-.134.199-.519.654-.636.782-.118.128-.235.143-.437.042-.202-.101-.853-.314-1.624-.999-.599-.533-1.003-1.193-1.121-1.396-.118-.202-.012-.31.089-.41.09-.091.202-.236.302-.354.1-.118.133-.2.202-.336.067-.134.034-.252-.017-.353-.05-.101-.454-1.094-.622-1.498-.164-.395-.325-.34-.455-.34-.117-.001-.252-.001-.387-.001-.134 0-.353.05-.537.25-.185.201-.706.69-706 1.685s.723 1.954.823 2.086c.1.13 1.42 2.167 3.44 3.04.48.208.854.333 1.144.425.483.153.923.131 1.271.079.388-.058 1.194-.488 1.362-.96.168-.472.168-.875.118-.96-.05-.084-.185-.134-.387-.235z"/>
-        </svg>
-        <span id="whatsappText">Chat on WhatsApp</span>
-    </a>
+    <!-- Portfolio Section -->
+    <section id="gallery" class="py-20 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="font-serif text-3xl lg:text-4xl font-bold text-stone-900 mb-4" id="sec2-title">Premium Wood Gallery</h2>
+                <div class="w-16 h-1 bg-timber-600 mx-auto rounded-full mb-8"></div>
+                
+                <!-- Category Filter Buttons -->
+                <div class="flex flex-wrap justify-center gap-3">
+                    <button id="filter-all" class="filter-btn px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 bg-timber-800 text-white shadow-md">All</button>
+                    <button id="filter-timber" class="filter-btn px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 bg-stone-100 text-stone-600 hover:bg-stone-200">Timber Depot</button>
+                    <button id="filter-furniture" class="filter-btn px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 bg-stone-100 text-stone-600 hover:bg-stone-200">Furniture Mart</button>
+                </div>
+            </div>
 
-    <!-- Footer Area -->
-    <footer class="bg-stone-950 text-stone-500 py-12 px-4 text-center border-t border-white/5">
-        <p id="footerText" class="text-sm">
-            © 2026 Sri Mahalakshmi Timber Depo & Furniture Mart. All Rights Reserved.
-        </p>
-    </footer>
+            <!-- Showcase Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
+                
+                <!-- Teak Wood Logs (Timber) -->
+                <div class="portfolio-item timber group relative overflow-hidden rounded-2xl shadow-md h-[320px] transition-all duration-500 hover:-translate-y-1">
+                    <img src="https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=600&q=80" alt="Timber Log Depot" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/40 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-timber-600 text-white px-2.5 py-1 rounded mb-2 inline-block">RAW MATERIAL</span>
+                        <h4 class="font-serif text-lg font-bold text-white mb-1" id="gal-t1">Burma Teak Wood Logs</h4>
+                        <p class="text-xs text-stone-300" id="gal-d1">Perfect for custom luxury construction.</p>
+                    </div>
+                </div>
 
-    <!-- Lead Capture Modal Overlay (Launches after 30 seconds) -->
-    <div id="leadModal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-500">
-        <div class="bg-white rounded-2xl max-w-md w-full mx-4 overflow-hidden shadow-2xl transform scale-95 transition-all duration-500 relative border border-stone-100">
-            <!-- Decorative Accent Header -->
-            <div class="h-2 bg-gradient-to-r from-timber-500 to-amber-500"></div>
+                <!-- Custom Sofa (Furniture) -->
+                <div class="portfolio-item furniture group relative overflow-hidden rounded-2xl shadow-md h-[320px] transition-all duration-500 hover:-translate-y-1">
+                    <img src="https://images.unsplash.com/photo-1581428982868-e410dd047a90?auto=format&fit=crop&w=600&q=80" alt="Premium Sofa" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/40 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-amber-500 text-stone-950 px-2.5 py-1 rounded mb-2 inline-block">FURNITURE</span>
+                        <h4 class="font-serif text-lg font-bold text-white mb-1" id="gal-t2">Premium Living Room Sofa</h4>
+                        <p class="text-xs text-stone-300" id="gal-d2">Rosewood framing with top fabric upholstery.</p>
+                    </div>
+                </div>
+
+                <!-- Royal Bed Frame (Furniture) -->
+                <div class="portfolio-item furniture group relative overflow-hidden rounded-2xl shadow-md h-[320px] transition-all duration-500 hover:-translate-y-1">
+                    <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=600&q=80" alt="Royal Bed" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/40 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-amber-500 text-stone-950 px-2.5 py-1 rounded mb-2 inline-block">FURNITURE</span>
+                        <h4 class="font-serif text-lg font-bold text-white mb-1" id="gal-t3">Emperor King Bed Frame</h4>
+                        <p class="text-xs text-stone-300" id="gal-d3">Sturdy teakwood bed with intricate carvings.</p>
+                    </div>
+                </div>
+
+                <!-- Hardwood Plank Pile (Timber) -->
+                <div class="portfolio-item timber group relative overflow-hidden rounded-2xl shadow-md h-[320px] transition-all duration-500 hover:-translate-y-1">
+                    <img src="https://images.unsplash.com/photo-1542125387-c71274d94f0a?auto=format&fit=crop&w=600&q=80" alt="Hardwood Logs" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/40 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-timber-600 text-white px-2.5 py-1 rounded mb-2 inline-block">RAW MATERIAL</span>
+                        <h4 class="font-serif text-lg font-bold text-white mb-1" id="gal-t4">Premium Teak Wood Planks</h4>
+                        <p class="text-xs text-stone-300" id="gal-d4">Termite-treated, seasoned construction cuts.</p>
+                    </div>
+                </div>
+
+                <!-- Custom Modular Kitchen Cabinet (Furniture) -->
+                <div class="portfolio-item furniture group relative overflow-hidden rounded-2xl shadow-md h-[320px] transition-all duration-500 hover:-translate-y-1">
+                    <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80" alt="Modular Cabinet" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/40 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-amber-500 text-stone-950 px-2.5 py-1 rounded mb-2 inline-block">FURNITURE</span>
+                        <h4 class="font-serif text-lg font-bold text-white mb-1" id="gal-t5">Contemporary Kitchen Cupboards</h4>
+                        <p class="text-xs text-stone-300" id="gal-d5">Moisture resistant designs with smooth sliders.</p>
+                    </div>
+                </div>
+
+                <!-- Luxury Dinning Table (Furniture) -->
+                <div class="portfolio-item furniture group relative overflow-hidden rounded-2xl shadow-md h-[320px] transition-all duration-500 hover:-translate-y-1">
+                    <img src="https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=600&q=80" alt="Dinning Table" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/40 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-amber-500 text-stone-950 px-2.5 py-1 rounded mb-2 inline-block">FURNITURE</span>
+                        <h4 class="font-serif text-lg font-bold text-white mb-1" id="gal-t6">Mahogany Dining Set</h4>
+                        <p class="text-xs text-stone-300" id="gal-d6">Robust 6-seater solid wood frame.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Google Review Trust Highlight Section -->
+    <section class="bg-stone-950 text-white py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="flex justify-center gap-1.5 text-amber-500 text-2xl lg:text-3xl mb-6">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="font-serif text-xl md:text-2xl lg:text-3xl italic mb-6 leading-relaxed" id="review-text">
+                "Sri Mahalakshmi Furniture provided exceptional work for my house. Excellent teak wood finish and very honest response."
+            </p>
+            <p class="text-amber-500 font-bold uppercase tracking-wider text-xs md:text-sm" id="review-author">— Venkat Prasad, Verified Customer Review</p>
+        </div>
+    </section>
+
+    <!-- Map & Location Section -->
+    <section id="contact" class="py-20 px-4 bg-timber-50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-3xl lg:text-4xl font-bold text-stone-900 mb-4" id="sec3-title">Visit Our Depot & Showroom</h2>
+                <div class="w-16 h-1 bg-timber-600 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+                <!-- Location Info -->
+                <div class="bg-white p-8 lg:p-12 rounded-3xl shadow-xl flex flex-col justify-between border border-timber-100">
+                    <div>
+                        <h3 class="font-serif text-2xl font-bold text-stone-900 mb-8" id="contact-heading">Sri Mahalakshmi Timber Depo</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex gap-4">
+                                <div class="text-timber-600 text-xl mt-1">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-stone-900 text-sm uppercase tracking-wider mb-1" id="lbl-addr">Office & Depot Location</h4>
+                                    <p class="text-stone-600 text-sm leading-relaxed">
+                                        Peruru Rd, Amalapuram,<br>
+                                        Bodasakurru, Andhra Pradesh 533218
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4">
+                                <div class="text-timber-600 text-xl mt-1">
+                                    <i class="fa-solid fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-stone-900 text-sm uppercase tracking-wider mb-1" id="lbl-hours">Timings</h4>
+                                    <p class="text-stone-600 text-sm" id="val-hours">Open Daily: 9:00 AM - 7:00 PM</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4">
+                                <div class="text-timber-600 text-xl mt-1">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-stone-900 text-sm uppercase tracking-wider mb-1" id="lbl-phone">Call Representative</h4>
+                                    <p class="text-stone-600 text-sm font-semibold">+91 92933 43999</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 pt-8 border-t border-stone-100 flex flex-col sm:flex-row gap-4">
+                        <a href="https://maps.google.com/?q=Peruru+Rd,+Amalapuram,+Bodasakurru,+Andhra+Pradesh+533218" target="_blank" class="bg-stone-900 hover:bg-stone-950 text-white font-bold px-6 py-4 rounded-xl shadow-md text-center flex items-center justify-center gap-2 transition-all duration-300">
+                            <i class="fa-solid fa-map-location-dot"></i> <span id="btn-maps">Get Google Map Route</span>
+                        </a>
+                        <a href="tel:+919293343999" class="bg-timber-600 hover:bg-timber-700 text-white font-bold px-6 py-4 rounded-xl shadow-md text-center flex items-center justify-center gap-2 transition-all duration-300">
+                            <i class="fa-solid fa-phone"></i> <span id="btn-call">Call Directly</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Google Maps Frame -->
+                <div class="rounded-3xl overflow-hidden shadow-xl min-h-[350px] border border-timber-200 relative">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3821.5794611598463!2d82.0292723!3d16.5147575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3821e285a7bb91%3A0xc3f63fa95d677180!2sPeruru%20Rd%2C%20Bodasakurru%2C%20Andhra%20Pradesh%20533218!5e0!3m2!1sen!2sin!4v1680000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0; min-height: 400px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 30-Second Lead Generation Form Modal -->
+    <div id="leadModal" class="fixed inset-0 z-50 flex items-center justify-center px-4 bg-stone-950/80 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-500">
+        <div class="bg-white rounded-3xl overflow-hidden max-w-md w-full shadow-2xl border border-timber-100 transform scale-90 transition-all duration-500 relative">
             
             <!-- Close Button -->
-            <button id="closeModalBtn" class="absolute top-4 right-4 text-stone-400 hover:text-stone-700 transition-colors text-2xl font-bold focus:outline-none">&times;</button>
-            
+            <button id="closeModal" class="absolute top-4 right-4 text-stone-400 hover:text-stone-900 p-2 text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
             <!-- Form Content -->
             <div class="p-8">
                 <div id="modalFormContainer">
@@ -316,15 +371,15 @@
                     <form id="leadForm" class="space-y-4">
                         <div>
                             <label id="lblModalName" class="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">Full Name</label>
-                            <input type="text" id="modalName" required class="w-full px-4 py-2.5 rounded-lg border border-stone-200 focus:outline-none focus:ring-2 focus:ring-timber-500 focus:border-transparent text-sm placeholder-stone-400" placeholder="e.g., Satish Kumar">
+                            <input type="text" id="modalName" name="name" required class="w-full px-4 py-2.5 rounded-lg border border-stone-200 focus:outline-none focus:ring-2 focus:ring-timber-500 focus:border-transparent text-sm placeholder-stone-400" placeholder="e.g., Satish Kumar">
                         </div>
                         <div>
                             <label id="lblModalPhone" class="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">Phone Number</label>
-                            <input type="tel" id="modalPhone" required class="w-full px-4 py-2.5 rounded-lg border border-stone-200 focus:outline-none focus:ring-2 focus:ring-timber-500 focus:border-transparent text-sm placeholder-stone-400" placeholder="e.g., +91 92933 43999">
+                            <input type="tel" id="modalPhone" name="phone" required class="w-full px-4 py-2.5 rounded-lg border border-stone-200 focus:outline-none focus:ring-2 focus:ring-timber-500 focus:border-transparent text-sm placeholder-stone-400" placeholder="e.g., +91 92933 43999">
                         </div>
                         <div>
                             <label id="lblModalEmail" class="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1">Email Address</label>
-                            <input type="email" id="modalEmail" required class="w-full px-4 py-2.5 rounded-lg border border-stone-200 focus:outline-none focus:ring-2 focus:ring-timber-500 focus:border-transparent text-sm placeholder-stone-400" placeholder="e.g., satish@gmail.com">
+                            <input type="email" id="modalEmail" name="email" required class="w-full px-4 py-2.5 rounded-lg border border-stone-200 focus:outline-none focus:ring-2 focus:ring-timber-500 focus:border-transparent text-sm placeholder-stone-400" placeholder="e.g., satish@gmail.com">
                         </div>
                         
                         <button type="submit" id="btnModalSubmit" class="w-full bg-timber-600 hover:bg-timber-700 text-white font-bold py-3 rounded-lg shadow-md hover:shadow-lg transition-all text-sm mt-6">
@@ -334,289 +389,336 @@
                 </div>
                 
                 <!-- Success State (Hidden initially) -->
-                <div id="modalSuccess" class="hidden text-center py-6">
-                    <div class="text-5xl mb-4 text-emerald-600 animate-bounce">✓</div>
-                    <h4 id="successTitle" class="text-2xl font-serif text-stone-900 font-bold mb-2">Thank You!</h4>
-                    <p id="successMsg" class="text-stone-600 text-sm mb-6">Your details have been successfully submitted. Our representative will contact you shortly.</p>
-                    <button id="successCloseBtn" class="bg-stone-900 hover:bg-stone-800 text-white font-semibold text-xs py-2.5 px-6 rounded-full transition-all">Close</button>
+                <div id="modalSuccess" class="hidden text-center py-8">
+                    <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <h3 id="modalSuccessTitle" class="text-2xl font-serif text-stone-900 font-bold mb-2">Thank You!</h3>
+                    <p id="modalSuccessDesc" class="text-stone-500 text-sm leading-relaxed">Your details have been successfully submitted. Our representative will contact you shortly.</p>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Floating WhatsApp Action Link -->
+    <a href="https://wa.me/919293343999?text=Hi" class="whatsapp-btn shadow-amber-950/20" target="_blank" id="ws-btn">
+        <i class="fa-brands fa-whatsapp text-xl"></i> <span id="ws-btn-text">Chat on WhatsApp</span>
+    </a>
+
+    <!-- Footer -->
+    <footer class="bg-stone-950 text-stone-500 py-12 px-4 border-t border-stone-900 text-center text-sm">
+        <p>&copy; 2026 Sri Mahalakshmi Timber Depo & Furniture Mart. <span id="foot-text">All Rights Reserved.</span></p>
+    </footer>
+
+    <!-- Application Logic -->
     <script>
-        // Core translation lookup database
+        // Dual Language Translations Engine Mapping
         const translations = {
             en: {
-                brandName: "SRI MAHALAKSHMI",
-                brandSub: "TIMBER DEPO & FURNITURE MART",
-                navAbout: "Our Services",
-                navGallery: "Showcase",
-                navContact: "Contact Us",
                 badge: "★ 5.0 Google Rated",
-                heroTitle: "Premium Timber. Master Craftsmanship.",
-                heroDesc: "Your ultimate destination for wholesale raw timber, custom-designed premium furniture, and architectural woodwork since 2001.",
-                heroBtn: "Get Free Quote",
-                statYears: "Years Experience",
-                statCustomers: "Projects Completed",
-                statWood: "Product Warranty",
-                statRating: "Google Reviews",
-                secAboutTitle: "Our Expertise",
+                navAbout: "Our Legacy",
+                navGallery: "Products Showcase",
+                navContact: "Contact Us",
+                heroTag: "ESTABLISHED IN 2001",
+                heroTitle: "Premium Timber. <br><span class='luxury-text-gradient'>Master Craftsmanship.</span>",
+                heroDesc: "Your one-stop destination for wholesale raw wood materials and custom-built, luxury home furniture designs in Amalapuram.",
+                heroBtnQuote: "Get Custom Pricing",
+                heroBtnExplore: "Explore Showcase",
+                statExperience: "Years of Wood Experience",
+                statProjects: "Success Projects Done",
+                statWarranty: "Craftsmanship Warranty",
+                sec1Title: "Our Premium Offerings",
                 card1Title: "Timber Depot",
-                card1Desc: "Sourcing certified, premium grade wholesale timber. Seasoned Burma Teak, Indian Rosewood, Neem, and Mahogany ready for heavy-duty construction and high-end carving.",
-                card2Title: "Custom Furniture Mart",
-                card2Desc: "Impeccably handcrafted dining tables, custom luxury sofa sets, solid wooden royal beds, and bespoke wardrobes tailored perfectly to your room's dimensions.",
-                card3Title: "Bespoke Woodwork",
-                card3Desc: "Complete end-to-end design, manufacturing, and installations for modern modular kitchen cupboards, TV consoles, partition panels, and designer doors.",
-                quoteText: '"The finest Teak wood in town and absolute masterpiece carving on our dining table. Outstanding 5-star finish!"',
-                quoteAuthor: "— Satish Kumar, Verified Customer",
-                secGalleryTitle: "Premium Craftsmanship Gallery",
-                filterAll: "All",
-                filterTimber: "Raw Timber",
-                filterFurniture: "Fine Furniture",
-                galSofa: "Luxury Living Room Sofas",
-                galTimber: "Premium Teak & Hardwood Logs",
-                galCupboard: "Modular Kitchen & Cupboards",
-                secContactTitle: "Visit Our Showroom",
-                contactBrand: "Sri Mahalakshmi Timber Depo",
-                addressLabel: "Store Location:",
-                addressText: "Peruru Rd, Amalapuram, Bodasakurru, Andhra Pradesh - 533218",
-                hoursLabel: "Business Hours:",
-                hoursText: "Open Daily: 9:00 AM - 7:00 PM",
-                phoneLabel: "Phone Number:",
-                mapTitle: "Amalapuram Branch",
-                mapSubtitle: "Directly located on Peruru Road, Amalapuram, for easy access, quick timber loading, and secure custom logistics.",
-                mapButton: "Open on Google Maps",
-                whatsappText: "Chat on WhatsApp",
-                footerText: "© 2026 Sri Mahalakshmi Timber Depo & Furniture Mart. All Rights Reserved.",
+                card1Desc: "Sourcing premium grade wholesale logs and cut timber including seasoned Teak, Rosewood, Neem, and Mahogany for all structural design work.",
+                card2Title: "Custom Furniture",
+                card2Desc: "Beautifully handcrafted dining tables, heavy luxury sofas, robust bed frames, and study tables tailored perfectly to your dimensions.",
+                card3Desc: "Complete modular design implementation. Modern wardrobes, TV units, luxury modular kitchen cupboards, and exquisite ceilings.",
+                reviewText: '"Sri Mahalakshmi Furniture provided exceptional work for my house. Excellent teak wood finish and very honest response."',
+                reviewAuthor: "— Venkat Prasad, Verified Customer Review",
+                sec2Title: "Premium Wood Gallery",
+                galT1: "Burma Teak Wood Logs",
+                galD1: "Perfect for custom luxury construction.",
+                galT2: "Premium Living Room Sofa",
+                galD2: "Rosewood framing with top fabric upholstery.",
+                galT3: "Emperor King Bed Frame",
+                galD3: "Sturdy teakwood bed with intricate carvings.",
+                galT4: "Premium Teak Wood Planks",
+                galD4: "Termite-treated, seasoned construction cuts.",
+                galT5: "Contemporary Kitchen Cupboards",
+                galD5: "Moisture resistant designs with smooth sliders.",
+                galT6: "Mahogany Dining Set",
+                galD6: "Robust 6-seater solid wood frame.",
+                sec3Title: "Visit Our Depot & Showroom",
+                contactHeading: "Sri Mahalakshmi Timber Depo",
+                lblAddr: "Office & Depot Location",
+                lblHours: "Timings",
+                valHours: "Open Daily: 9:00 AM - 7:00 PM",
+                lblPhone: "Call Representative",
+                btnMaps: "Get Google Map Route",
+                btnCall: "Call Directly",
+                wsBtn: "Chat on WhatsApp",
+                footText: "All Rights Reserved.",
+                // Modal specific translations
                 modalTitle: "Get Custom Pricing",
                 modalSub: "Leave your details and our team will get in touch with a customized quote!",
                 lblModalName: "Full Name",
                 lblModalPhone: "Phone Number",
                 lblModalEmail: "Email Address",
                 btnModalSubmit: "Submit & Request Callback",
-                successTitle: "Thank You!",
-                successMsg: "Your details have been successfully submitted. Our representative will contact you shortly."
+                modalSuccessTitle: "Thank You!",
+                modalSuccessDesc: "Your details have been successfully submitted. Our representative will contact you shortly."
             },
             te: {
-                brandName: "శ్రీ మహాలక్ష్మి",
-                brandSub: "టింబర్ డిపో & ఫర్నిచర్ మార్ట్",
-                navAbout: "మా సేవలు",
-                navGallery: "గ్యాలరీ",
-                navContact: "సంప్రదించండి",
                 badge: "★ 5.0 గూగుల్ రేటింగ్",
-                heroTitle: "ప్రీమియం కలప. అద్భుతమైన హస్తకళ.",
-                heroDesc: "2001 నుండి హోల్‌సేల్ పచ్చి కలప సామాగ్రి, ఆర్డర్ పై తయారుచేసే ప్రీమియం ఫర్నిచర్ మరియు ఇంటీరియర్ ఉడ్‌వర్క్ కోసం అత్యుత్తమ కేంద్రం.",
-                heroBtn: "ధర అడగండి",
-                statYears: "సంవత్సరాల అనుభవం",
-                statCustomers: "పూర్తయిన ప్రాజెక్ట్‌లు",
-                statWood: "ఉత్పత్తి వారంటీ",
-                statRating: "గూగుల్ రేటింగ్",
-                secAboutTitle: "మా సేవలు",
+                navAbout: "మా చరిత్ర",
+                navGallery: "ఉత్పత్తుల ప్రదర్శన",
+                navContact: "సంప్రదించండి",
+                heroTag: "స్థాపించబడింది 2001 లో",
+                heroTitle: "ప్రీమియం కలప. <br><span class='luxury-text-gradient'>అద్భుతమైన హస్తకళ.</span>",
+                heroDesc: "అమలాపురంలో హోల్‌సేల్ పచ్చి కలప సామాగ్రి మరియు మీ ఆర్డర్ పై తయారు చేయబడే లగ్జరీ గృహ ఫర్నిచర్ డిజైన్‌ల కోసం ఏకైక కేంద్రం.",
+                heroBtnQuote: "ఉచిత కొలతలు పొందండి",
+                heroBtnExplore: "సేకరణను చూడండి",
+                statExperience: "సంవత్సరాల కలప వ్యాపార అనుభవం",
+                statProjects: "విజయవంతమైన ప్రాజెక్ట్స్",
+                statWarranty: "హస్తకళ గ్యారెంటీ",
+                sec1Title: "మా ప్రత్యేకతలు",
                 card1Title: "టింబర్ డిపో",
-                card1Desc: "నిర్మాణాలకు మరియు ఫర్నిచర్ తయారీకి ఉపయోగపడే మేలు రకమైన బర్మా టేకు, రోజ్‌వుడ్ (సీసం), వేప మరియు రాగి కలప హోల్‌సేల్ డిపో.",
-                card2Title: "కస్టమ్ ఫర్నిచర్ మార్ట్",
-                card2Desc: "మీరు కోరిన కొలతలకు అనుగుణంగా తయారు చేయబడిన రాజసం ఉట్టిపడే డైనింగ్ టేబుల్‌లు, లగ్జరీ సోఫాలు, మంచాలు మరియు వార్డ్‌రోబ్‌లు.",
-                card3Title: "ఇంటీరియర్ ఉడ్‌వర్క్",
-                card3Desc: "ఆధునిక మోడ్యులర్ వంటగది క్యాబినెట్‌లు, అందమైన టీవీ యూనిట్లు, పూజ గది డిజైన్లు మరియు చెక్క తలుపుల తయారీ.",
-                quoteText: '"పట్టణంలోనే అత్యుత్తమ టేకు కలప లభిస్తుంది. మా డైనింగ్ టేబుల్ అద్భుతంగా చెక్కారు. అద్భుతమైన 5-స్టార్ ఫినిషింగ్!"',
-                quoteAuthor: "— సతీష్ కుమార్, ధృవీకరించబడిన కస్టమర్",
-                secGalleryTitle: "మా ప్రీమియం హస్తకళా గ్యాలరీ",
-                filterAll: "అన్నీ",
-                filterTimber: "పచ్చి కలప",
-                filterFurniture: "తయారుచేసిన ఫర్నిచర్",
-                galSofa: "లగ్జరీ సోఫా సెట్లు",
-                galTimber: "మేలురకం టేకు & గట్టి కలప దుంగలు",
-                galCupboard: "మోడ్యులర్ కిచేన్ & కప్‌బోర్డ్‌లు",
-                secContactTitle: "మా షోరూమ్‌ని సందర్శించండి",
-                contactBrand: "శ్రీ మహాలక్ష్మి టింబర్ డిపో",
-                addressLabel: "షోరూమ్ చిరునామా:",
-                addressText: "పెరూరు రోడ్, అమలాపురం, బోడసకుర్రు, ఆంధ్రప్రదేశ్ - 533218",
-                hoursLabel: "పని వేళలు:",
-                hoursText: "ప్రతిరోజూ: ఉదయం 9:00 - రాత్రి 7:00 వరకు",
-                phoneLabel: "ఫోన్ నంబర్:",
-                mapTitle: "అమలాపురం బ్రాంచ్",
-                mapSubtitle: "రవాణా సరుకులు సులభంగా లోడ్ చేయడానికి అమలాపురం పెరూరు రోడ్‌లో నేరుగా కలదు.",
-                mapButton: "గూగుల్ మ్యాప్స్ లో చూడండి",
-                whatsappText: "వాట్సాప్‌లో చాట్ చేయండి",
-                footerText: "© 2026 శ్రీ మహాలక్ష్మి టింబర్ డిపో & ఫర్నిచర్ మార్ట్. సర్వ హక్కులు ప్రత్యేకించబడినవి.",
-                modalTitle: "ప్రత్యేక ధరలు పొందండి",
-                modalSub: "ఉచిత కస్టమైజ్డ్ కొటేషన్ కోసం మీ వివరాలను ఇక్కడ నమోదు చేయండి!",
+                card1Desc: "నిర్మాణ అవసరాల కొరకు మేలు రకమైన టేకు, రోజ్‌వుడ్, వేప మరియు జామ కలప దిమ్మలు మరియు కోత కలప హోల్‌సేల్ సరఫరా.",
+                card2Title: "కస్టమ్ ఫర్నిచర్",
+                card2Desc: "మీరు కోరిన సైజులకు అనుగుణంగా తయారు చేయబడిన డైనింగ్ టేబుల్‌లు, లగ్జరీ సోఫాలు, గట్టి మంచాలు మరియు స్టడీ టేబుళ్లు.",
+                card3Desc: "ఇంటి ఇంటీరియర్ పనులు. మోడ్రన్ వార్డ్‌రోబ్‌లు, టీవీ యూనిట్లు, లగ్జరీ కిచెన్ కప్‌బోర్డులు మరియు అద్భుతమైన సీలింగ్ డిజైన్లు.",
+                reviewText: '"మా ఇంటికి శ్రీ మహాలక్ష్మి ఫర్నిచర్ చాలా అద్భుతమైన వర్క్ చేసి ఇచ్చారు. టేకు ఫినిషింగ్ చాలా బాగుంది, సకాలంలో పూర్తి చేశారు."',
+                reviewAuthor: "— వెంకట్ ప్రసాద్, వెరిఫైడ్ కస్టమర్ రివ్యూ",
+                sec2Title: "ప్రీమియం కలప గ్యాలరీ",
+                galT1: "బర్మా టేకు కలప మొద్దులు",
+                galD1: "భవన నిర్మాణానికి మరియు ఇంటీరియర్స్ కు అత్యుత్తమం.",
+                galT2: "ప్రీమియం సోఫా సెట్",
+                galD2: "రోజ్‌వుడ్ ఫ్రేమింగ్‌తో నిర్మితమైన ఆధునిక సోఫా.",
+                galT3: "రాచరిక టేకు మంచం",
+                galD3: "అందమైన నగిషీలతో కూడిన టేకు మంచం.",
+                galT4: "ప్రీమియం టేకు కలప బల్లలు",
+                galD4: "చదలు పట్టని, సీజన్డ్ కన్‌స్ట్రక్షన్ కట్స్.",
+                galT5: "ఆధునిక వంటగది క్యాబినెట్లు",
+                galD5: "తేమను తట్టుకునే మోడ్యులర్ కిచెన్ కప్‌బోర్డ్స్.",
+                galT6: "మహోగని డైనింగ్ సెట్",
+                galD6: "మన్నికైన 6 సీటర్ సాలిడ్ కలప డైనింగ్ టేబుల్.",
+                sec3Title: "మా డిపో మరియు షోరూమ్ సందర్శించండి",
+                contactHeading: "శ్రీ మహాలక్ష్మి టింబర్ డిపో",
+                lblAddr: "ఆఫీస్ & డిపో అడ్రస్",
+                lblHours: "పనివేళలు",
+                valHours: "ప్రతిరోజూ: ఉదయం 9:00 - రాత్రి 7:00 వరకు",
+                lblPhone: "ప్రతినిధిని సంప్రదించండి",
+                btnMaps: "గూగుల్ మ్యాప్స్ రూట్",
+                btnCall: "డైరెక్ట్ ఫోన్ కాల్",
+                wsBtn: "వాట్సాప్‌లో చాట్ చేయండి",
+                footText: "సర్వ హక్కులు ప్రత్యేకించబడినవి.",
+                // Modal specific translations
+                modalTitle: "కస్టమ్ కొటేషన్ పొందండి",
+                modalSub: "మీ వివరాలను క్రింద నమోదు చేయండి, మా ప్రతినిధి వెంటనే మీకు కాల్ చేసి వివరాలు తెలియజేస్తారు!",
                 lblModalName: "పూర్తి పేరు",
-                lblModalPhone: "ఫోన్ నంబర్",
-                lblModalEmail: "ఈమెయిల్ చిరునామా",
+                lblModalPhone: "ఫోన్ నెంబర్",
+                lblModalEmail: "ఇమెయిల్ అడ్రస్",
                 btnModalSubmit: "సమర్పించి కాల్ అడగండి",
-                successTitle: "ధన్యవాదాలు!",
-                successMsg: "మీ వివరాలు విజయవంతంగా సమర్పించబడ్డాయి. మా ప్రతినిధి మిమ్మల్ని త్వరలోనే సంప్రదిస్తారు."
+                modalSuccessTitle: "ధన్యవాదాలు!",
+                modalSuccessDesc: "మీ వివరాలు విజయవంతంగా అందాయి. మా ప్రతినిధి అతి త్వరలోనే మిమ్మల్ని సంప్రదిస్తారు."
             }
         };
 
-        function switchLanguage(lang) {
-            // 1. Swap active highlight class state on buttons visually
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if (btn.getAttribute('data-lang') === lang) {
-                    btn.classList.add('bg-timber-700', 'text-white');
-                    btn.classList.remove('text-neutral-400');
-                } else {
-                    btn.classList.remove('bg-timber-700', 'text-white');
-                    btn.classList.add('text-neutral-400');
-                }
-            });
+        const btnLangEn = document.getElementById('btn-lang-en');
+        const btnLangTe = document.getElementById('btn-lang-te');
 
-            // 2. Set DOM lang attribute standard
-            document.documentElement.lang = lang;
+        function setLanguage(lang) {
+            localStorage.setItem('selectedLang', lang);
+            
+            // Switch button highlighting styles
+            if (lang === 'en') {
+                btnLangEn.className = "text-xs px-3 py-1.5 rounded-full font-bold transition-all duration-300 bg-timber-600 text-white shadow-md";
+                btnLangTe.className = "text-xs px-3 py-1.5 rounded-full font-bold transition-all duration-300 text-stone-400 hover:text-white";
+            } else {
+                btnLangTe.className = "text-xs px-3 py-1.5 rounded-full font-bold transition-all duration-300 bg-timber-600 text-white shadow-md";
+                btnLangEn.className = "text-xs px-3 py-1.5 rounded-full font-bold transition-all duration-300 text-stone-400 hover:text-white";
+            }
 
-            // 3. Update Text Content inside all element nodes dynamically
-            const t = translations[lang];
+            // Apply global translations mapped directly to DOM elements
+            document.getElementById('txt-badge').innerText = translations[lang].badge;
+            document.getElementById('nav-about').innerText = translations[lang].navAbout;
+            document.getElementById('nav-gallery').innerText = translations[lang].navGallery;
+            document.getElementById('nav-contact').innerText = translations[lang].navContact;
             
-            const translatableIds = [
-                'brandName', 'brandSub', 'navAbout', 'navGallery', 'navContact', 
-                'badge', 'heroTitle', 'heroDesc', 'heroBtn', 'statYears', 'statCustomers', 
-                'statWood', 'statRating', 'secAboutTitle', 'card1Title', 'card1Desc', 
-                'card2Title', 'card2Desc', 'card3Title', 'card3Desc', 'quoteText', 
-                'quoteAuthor', 'secGalleryTitle', 'filterAll', 'filterTimber', 'filterFurniture',
-                'galSofa', 'galTimber', 'galCupboard', 'secContactTitle', 'contactBrand',
-                'addressLabel', 'addressText', 'hoursLabel', 'hoursText', 'phoneLabel', 
-                'mapTitle', 'mapSubtitle', 'mapButton', 'whatsappText', 'footerText',
-                'modalTitle', 'modalSub', 'lblModalName', 'lblModalPhone', 'lblModalEmail',
-                'btnModalSubmit', 'successTitle', 'successMsg'
-            ];
-            
-            translatableIds.forEach(id => {
-                const element = document.getElementById(id);
-                if (element && t[id]) {
-                    element.textContent = t[id];
-                }
-            });
+            document.getElementById('hero-tag').innerText = translations[lang].heroTag;
+            document.getElementById('hero-title').innerHTML = translations[lang].heroTitle;
+            document.getElementById('hero-desc').innerText = translations[lang].heroDesc;
+            document.getElementById('hero-btn-quote-text').innerText = translations[lang].heroBtnQuote;
+            document.getElementById('hero-btn-explore').innerText = translations[lang].heroBtnExplore;
+
+            document.getElementById('stat-experience').innerText = translations[lang].statExperience;
+            document.getElementById('stat-projects').innerText = translations[lang].statProjects;
+            document.getElementById('stat-warranty').innerText = translations[lang].statWarranty;
+
+            document.getElementById('sec1-title').innerText = translations[lang].sec1Title;
+            document.getElementById('card1-title').innerText = translations[lang].card1Title;
+            document.getElementById('card1-desc').innerText = translations[lang].card1Desc;
+            document.getElementById('card2-title').innerText = translations[lang].card2Title;
+            document.getElementById('card2-desc').innerText = translations[lang].card2Desc;
+            document.getElementById('card3-desc').innerText = translations[lang].card3Desc;
+
+            document.getElementById('review-text').innerText = translations[lang].reviewText;
+            document.getElementById('review-author').innerText = translations[lang].reviewAuthor;
+
+            document.getElementById('sec2-title').innerText = translations[lang].sec2Title;
+            document.getElementById('gal-t1').innerText = translations[lang].galT1;
+            document.getElementById('gal-d1').innerText = translations[lang].galD1;
+            document.getElementById('gal-t2').innerText = translations[lang].galT2;
+            document.getElementById('gal-d2').innerText = translations[lang].galD2;
+            document.getElementById('gal-t3').innerText = translations[lang].galT3;
+            document.getElementById('gal-d3').innerText = translations[lang].galD3;
+            document.getElementById('gal-t4').innerText = translations[lang].galT4;
+            document.getElementById('gal-d4').innerText = translations[lang].galD4;
+            document.getElementById('gal-t5').innerText = translations[lang].galT5;
+            document.getElementById('gal-d5').innerText = translations[lang].galD5;
+            document.getElementById('gal-t6').innerText = translations[lang].galT6;
+            document.getElementById('gal-d6').innerText = translations[lang].galD6;
+
+            document.getElementById('sec3-title').innerText = translations[lang].sec3Title;
+            document.getElementById('contact-heading').innerText = translations[lang].contactHeading;
+            document.getElementById('lbl-addr').innerText = translations[lang].lblAddr;
+            document.getElementById('lbl-hours').innerText = translations[lang].lblHours;
+            document.getElementById('val-hours').innerText = translations[lang].valHours;
+            document.getElementById('lbl-phone').innerText = translations[lang].lblPhone;
+            document.getElementById('btn-maps').innerText = translations[lang].btnMaps;
+            document.getElementById('btn-call').innerText = translations[lang].btnCall;
+
+            document.getElementById('ws-btn-text').innerText = translations[lang].wsBtn;
+            document.getElementById('foot-text').innerText = translations[lang].footText;
+
+            // Modal specific
+            document.getElementById('modalTitle').innerText = translations[lang].modalTitle;
+            document.getElementById('modalSub').innerText = translations[lang].modalSub;
+            document.getElementById('lbl-name').innerText = translations[lang].lblModalName;
+            document.getElementById('lbl-phone').innerText = translations[lang].lblModalPhone;
+            document.getElementById('lbl-email').innerText = translations[lang].lblModalEmail;
+            document.getElementById('btnModalSubmit').innerText = translations[lang].btnModalSubmit;
+            document.getElementById('modalSuccessTitle').innerText = translations[lang].modalSuccessTitle;
+            document.getElementById('modalSuccessDesc').innerText = translations[lang].modalSuccessDesc;
         }
 
-        // Safe programmatic event registry bypassing iframe/browser blockades
-        document.addEventListener('DOMContentLoaded', () => {
-            const btnEn = document.getElementById('btn-en');
-            const btnTe = document.getElementById('btn-te');
+        // Programmatic Event Listeners to bypass strict Vercel/GitHub Pages sandbox executions
+        btnLangEn.addEventListener('click', () => setLanguage('en'));
+        btnLangTe.addEventListener('click', () => setLanguage('te'));
 
-            if (btnEn) {
-                btnEn.addEventListener('click', () => {
-                    switchLanguage('en');
+        // On Load initialization
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('selectedLang') || 'en';
+            setLanguage(savedLang);
+        });
+
+        // Interactive Portfolio Filter Code
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Reset active styles on buttons
+                filterBtns.forEach(b => {
+                    b.className = "filter-btn px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 bg-stone-100 text-stone-600 hover:bg-stone-200";
                 });
-            }
+                
+                // Set active style on current clicked button
+                btn.className = "filter-btn px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 bg-timber-800 text-white shadow-md";
 
-            if (btnTe) {
-                btnTe.addEventListener('click', () => {
-                    switchLanguage('te');
-                });
-            }
+                const category = btn.id.split('-')[1];
 
-            const filterBtns = {
-                all: document.getElementById('filter-all'),
-                timber: document.getElementById('filter-timber'),
-                furniture: document.getElementById('filter-furniture')
-            };
-
-            const galleryItems = document.querySelectorAll('.gallery-item');
-
-            function applyFilter(activeCategory, activeBtn) {
-                // Update filter buttons styling
-                Object.values(filterBtns).forEach(btn => {
-                    if (btn) {
-                        btn.className = "filter-btn px-6 py-2 rounded-full font-semibold text-sm transition-all bg-white text-stone-700 hover:bg-stone-100 border border-stone-200";
-                    }
-                });
-                if (activeBtn) {
-                    activeBtn.className = "filter-btn px-6 py-2 rounded-full font-semibold text-sm transition-all bg-timber-800 text-white shadow-md";
-                }
-
-                // Filter elements
-                galleryItems.forEach(item => {
-                    const itemCat = item.getAttribute('data-category');
-                    if (activeCategory === 'all' || itemCat === activeCategory) {
-                        item.style.display = 'block';
-                        setTimeout(() => {
-                            item.style.opacity = '1';
-                            item.style.transform = 'scale(1)';
-                        }, 50);
+                portfolioItems.forEach(item => {
+                    if (category === 'all') {
+                        item.classList.remove('hidden');
+                    } else if (item.classList.contains(category)) {
+                        item.classList.remove('hidden');
                     } else {
-                        item.style.opacity = '0';
-                        item.style.transform = 'scale(0.95)';
-                        setTimeout(() => {
-                            item.style.display = 'none';
-                        }, 200);
+                        item.classList.add('hidden');
                     }
                 });
+            });
+        });
+
+        // 30-Second Modal Logic
+        const leadModal = document.getElementById('leadModal');
+        const closeModal = document.getElementById('closeModal');
+        const leadForm = document.getElementById('leadForm');
+        const modalFormContainer = document.getElementById('modalFormContainer');
+        const modalSuccess = document.getElementById('modalSuccess');
+
+        function showModal() {
+            leadModal.classList.remove('pointer-events-none', 'opacity-0');
+            leadModal.querySelector('div').classList.remove('scale-90');
+        }
+
+        function hideModal() {
+            leadModal.classList.add('pointer-events-none', 'opacity-0');
+            leadModal.querySelector('div').classList.add('scale-90');
+            localStorage.setItem('leadClosed', 'true');
+        }
+
+        // Timer triggers after 30 seconds
+        setTimeout(() => {
+            const submitted = localStorage.getItem('leadCaptured');
+            const closed = localStorage.getItem('leadClosed');
+            if (!submitted && !closed) {
+                showModal();
             }
+        }, 30000); // 30 seconds
 
-            if (filterBtns.all) filterBtns.all.addEventListener('click', () => applyFilter('all', filterBtns.all));
-            if (filterBtns.timber) filterBtns.timber.addEventListener('click', () => applyFilter('timber', filterBtns.timber));
-            if (filterBtns.furniture) filterBtns.furniture.addEventListener('click', () => applyFilter('furniture', filterBtns.furniture));
+        closeModal.addEventListener('click', hideModal);
 
-            const leadModal = document.getElementById('leadModal');
-            const leadForm = document.getElementById('leadForm');
-            const modalFormContainer = document.getElementById('modalFormContainer');
-            const modalSuccess = document.getElementById('modalSuccess');
-            
-            function showModal() {
-                const modalBox = leadModal.querySelector('div');
-                leadModal.classList.remove('opacity-0', 'pointer-events-none');
-                leadModal.classList.add('opacity-100');
-                modalBox.classList.remove('scale-95');
-                modalBox.classList.add('scale-100');
-            }
-
-            function hideModal() {
-                const modalBox = leadModal.querySelector('div');
-                leadModal.classList.add('opacity-0', 'pointer-events-none');
-                leadModal.classList.remove('opacity-100');
-                modalBox.classList.add('scale-95');
-                modalBox.classList.remove('scale-100');
-            }
-
-            // Timer triggers after 30 seconds
-            setTimeout(() => {
-                const submitted = localStorage.getItem('leadCaptured');
-                const closed = localStorage.getItem('leadClosed');
-                // Only show if user hasn't already submitted details or manually closed it in this session
-                if (!submitted && !closed) {
-                    showModal();
-                }
-            }, 30000); // 30,000 milliseconds = 30 seconds
-
-            // Form Submit handler
-            if (leadForm) {
-                leadForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    
-                    const nameVal = document.getElementById('modalName').value;
-                    const phoneVal = document.getElementById('modalPhone').value;
-                    const emailVal = document.getElementById('modalEmail').value;
-
-                    // Save data locally on the user's browser
-                    const leadDetails = { name: nameVal, phone: phoneVal, email: emailVal, timestamp: new Date().toISOString() };
-                    localStorage.setItem('leadDetails', JSON.stringify(leadDetails));
-                    localStorage.setItem('leadCaptured', 'true');
-
-                    // Switch view inside the card to Success State
-                    modalFormContainer.classList.add('hidden');
-                    modalSuccess.classList.remove('hidden');
-                });
-            }
-
-            // Close modal button handlers
-            const closeBtn = document.getElementById('closeModalBtn');
-            const successCloseBtn = document.getElementById('successCloseBtn');
-
-            if (closeBtn) {
-                closeBtn.addEventListener('click', () => {
-                    localStorage.setItem('leadClosed', 'true');
-                    hideModal();
-                });
-            }
-
-            if (successCloseBtn) {
-                successCloseBtn.addEventListener('click', () => {
-                    hideModal();
-                });
+        // Click outside modal block to close
+        leadModal.addEventListener('click', (e) => {
+            if (e.target === leadModal) {
+                hideModal();
             }
         });
+
+        // Form Submit handler
+        if (leadForm) {
+            leadForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const nameVal = document.getElementById('modalName').value;
+                const phoneVal = document.getElementById('modalPhone').value;
+                const emailVal = document.getElementById('modalEmail').value;
+
+                // 1. Save data locally on the user's browser
+                const leadDetails = { name: nameVal, phone: phoneVal, email: emailVal, timestamp: new Date().toISOString() };
+                localStorage.setItem('leadDetails', JSON.stringify(leadDetails));
+                localStorage.setItem('leadCaptured', 'true');
+
+                // 2. Submit programmatically to Google Sheets
+                // REPLACE THIS URL with your actual Google Apps Script Web App URL from the guide
+                const googleSheetsUrl = 'YOUR_GOOGLE_SHEETS_WEBAPP_URL_HERE';
+                
+                if (googleSheetsUrl && googleSheetsUrl !== 'YOUR_GOOGLE_SHEETS_WEBAPP_URL_HERE') {
+                    const formData = new FormData();
+                    formData.append('Name', nameVal);
+                    formData.append('Phone', phoneVal);
+                    formData.append('Email', emailVal);
+                    formData.append('Timestamp', new Date().toLocaleString());
+
+                    fetch(googleSheetsUrl, {
+                        method: 'POST',
+                        body: formData,
+                        mode: 'no-cors' // Allows submitting without strict CORS errors
+                    })
+                    .then(() => {
+                        console.log('Lead saved to Google Sheet successfully.');
+                    })
+                    .catch((error) => {
+                        console.error('Error sending lead to Google Sheet:', error);
+                    });
+                }
+
+                // Switch view inside the card to Success State immediately
+                modalFormContainer.classList.add('hidden');
+                modalSuccess.classList.remove('hidden');
+            });
+        }
     </script>
 </body>
 </html>
